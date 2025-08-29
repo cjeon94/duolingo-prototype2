@@ -1,10 +1,16 @@
 import React from "react";
-import { Screen8 } from "../Screen8/Screen8";
 
 interface Exercise {
   english: string;
   spanish: string;
   list: string[];
+}
+
+interface HarderExercise {
+  english: string;
+  spanish: string;
+  list: string[];
+  type: 'translation' | 'listening' | 'speaking';
 }
 
 const exercises: Exercise[] = [
@@ -25,15 +31,39 @@ const exercises: Exercise[] = [
   }
 ];
 
+const harderExercises: HarderExercise[] = [
+  {
+    english: "I would like to make a reservation for tonight at eight o'clock",
+    spanish: "Me gustaría hacer una reserva para esta noche a las ocho",
+    list: ["Me", "gustaría", "hacer", "una", "reserva", "para", "esta", "noche", "a", "las", "ocho", "mañana", "tarde", "ayer", "siempre", "nunca", "quiero", "necesito"],
+    type: 'translation'
+  },
+  {
+    english: "The weather forecast says it will rain tomorrow morning",
+    spanish: "El pronóstico del tiempo dice que lloverá mañana por la mañana",
+    list: ["El", "pronóstico", "del", "tiempo", "dice", "que", "lloverá", "mañana", "por", "la", "mañana", "tarde", "noche", "hoy", "ayer", "sol", "nieve", "viento"],
+    type: 'translation'
+  },
+  {
+    english: "Could you please help me find the nearest subway station?",
+    spanish: "¿Podrías ayudarme a encontrar la estación de metro más cercana?",
+    list: ["¿Podrías", "ayudarme", "a", "encontrar", "la", "estación", "de", "metro", "más", "cercana?", "hospital", "banco", "tienda", "restaurante", "hotel", "aeropuerto"],
+    type: 'translation'
+  }
+];
+
 interface Screen7Props {
   onResponse: (skipToAdvanced: boolean) => void;
 }
 
 export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
   const [showModal, setShowModal] = React.useState(true);
-  const [showScreen8, setShowScreen8] = React.useState(false);
+  const [showHarderQuiz, setShowHarderQuiz] = React.useState(false);
   const [currentExercise, setCurrentExercise] = React.useState<Exercise>(() => 
     exercises[Math.floor(Math.random() * exercises.length)]
+  );
+  const [currentHarderExercise, setCurrentHarderExercise] = React.useState<HarderExercise>(() => 
+    harderExercises[Math.floor(Math.random() * harderExercises.length)]
   );
   const [selectedWords, setSelectedWords] = React.useState<string[]>([]);
   const [availableWords, setAvailableWords] = React.useState<string[]>([]);
@@ -43,17 +73,22 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
 
   // Initialize available words when exercise changes
   React.useEffect(() => {
-    setAvailableWords([...currentExercise.list].sort(() => Math.random() - 0.5));
+    if (showHarderQuiz) {
+      setAvailableWords([...currentHarderExercise.list].sort(() => Math.random() - 0.5));
+    } else {
+      setAvailableWords([...currentExercise.list].sort(() => Math.random() - 0.5));
+    }
     setSelectedWords([]);
     setIsChecked(false);
     setResult(null);
-  }, [currentExercise]);
+  }, [currentExercise, currentHarderExercise, showHarderQuiz]);
 
   // Auto-play audio when exercise changes
   React.useEffect(() => {
     if (!showModal) {
       const timer = setTimeout(() => {
-        const utterance = new SpeechSynthesisUtterance(currentExercise.english);
+        const sentence = showHarderQuiz ? currentHarderExercise.english : currentExercise.english;
+        const utterance = new SpeechSynthesisUtterance(sentence);
         utterance.lang = 'en-US';
         utterance.rate = 0.8;
         speechSynthesis.speak(utterance);
@@ -61,11 +96,12 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
 
       return () => clearTimeout(timer);
     }
-  }, [currentExercise.english, showModal]);
+  }, [currentExercise.english, currentHarderExercise.english, showModal, showHarderQuiz]);
 
   const handleModalResponse = (skipToAdvanced: boolean) => {
     if (skipToAdvanced) {
-      setShowScreen8(true);
+      setShowHarderQuiz(true);
+      setShowModal(false);
     } else {
       setShowModal(false);
     }
@@ -85,7 +121,8 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
 
   const handleCheck = () => {
     const userAnswer = selectedWords.join(' ');
-    const isCorrect = userAnswer === currentExercise.spanish;
+    const correctAnswer = showHarderQuiz ? currentHarderExercise.spanish : currentExercise.spanish;
+    const isCorrect = userAnswer === correctAnswer;
     setResult(isCorrect ? 'correct' : 'incorrect');
     setIsChecked(true);
     
@@ -96,8 +133,13 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
       });
       
       setTimeout(() => {
-        const nextExercise = exercises[Math.floor(Math.random() * exercises.length)];
-        setCurrentExercise(nextExercise);
+        if (showHarderQuiz) {
+          const nextExercise = harderExercises[Math.floor(Math.random() * harderExercises.length)];
+          setCurrentHarderExercise(nextExercise);
+        } else {
+          const nextExercise = exercises[Math.floor(Math.random() * exercises.length)];
+          setCurrentExercise(nextExercise);
+        }
         setExerciseCount(prev => prev + 1);
       }, 1500);
     } else {
@@ -110,18 +152,21 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
 
   const handleSkip = () => {
     setSelectedWords([]);
-    setAvailableWords([...currentExercise.list].sort(() => Math.random() - 0.5));
+    if (showHarderQuiz) {
+      setAvailableWords([...currentHarderExercise.list].sort(() => Math.random() - 0.5));
+    } else {
+      setAvailableWords([...currentExercise.list].sort(() => Math.random() - 0.5));
+    }
     setIsChecked(false);
     setResult(null);
   };
 
-  // If Screen8 should be shown, render it instead
-  if (showScreen8) {
-    return <Screen8 />;
-  }
-
-  const englishTokens = currentExercise.english.split(' ');
-  const progressPercentage = Math.min(25 + (exerciseCount * 15), 100);
+  const currentSentence = showHarderQuiz ? currentHarderExercise.english : currentExercise.english;
+  const currentCorrectAnswer = showHarderQuiz ? currentHarderExercise.spanish : currentExercise.spanish;
+  const englishTokens = currentSentence.split(' ');
+  const baseProgress = showHarderQuiz ? 60 : 25;
+  const progressPercentage = Math.min(baseProgress + (exerciseCount * 10), 100);
+  const levelNumber = showHarderQuiz ? 8 + exerciseCount : 2 + exerciseCount;
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -154,11 +199,11 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
 
         {/* Level Indicator */}
         <div className="flex items-center gap-3 px-6 mb-8">
-          <div className="w-8 h-8 bg-[#ce82ff] rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-sm">{2 + exerciseCount}</span>
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${showHarderQuiz ? 'bg-[#ff6b35]' : 'bg-[#ce82ff]'}`}>
+            <span className="text-white font-bold text-sm">{levelNumber}</span>
           </div>
-          <span className="text-[#ce82ff] font-bold text-sm tracking-wider">
-            LEVEL {2 + exerciseCount}
+          <span className={`font-bold text-sm tracking-wider ${showHarderQuiz ? 'text-[#ff6b35]' : 'text-[#ce82ff]'}`}>
+            {showHarderQuiz ? 'ADVANCED' : 'LEVEL'} {levelNumber}
           </span>
         </div>
 
@@ -166,7 +211,7 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
         <div className="px-6 pb-32">
           {/* Title */}
           <h1 className="text-2xl font-bold text-[#4b4b4b] mb-8">
-            Write this in Spanish
+            {showHarderQuiz ? 'Translate this complex sentence' : 'Write this in Spanish'}
           </h1>
 
           {/* Top Row - Duo and English Sentence */}
@@ -174,7 +219,7 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
             {/* Duo Character */}
             <div className="w-28 h-28 flex items-center justify-center flex-shrink-0">
               <img 
-                src="/Duo Character 1.svg" 
+                src={showHarderQuiz ? "/Duo Character 4.svg" : "/Duo Character 1.svg"}
                 alt="Duo character" 
                 className="w-28 h-28 object-contain"
               />
@@ -185,7 +230,7 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
               <button
                 className="w-12 h-12 rounded-xl border-0 p-0 shadow-md bg-[#1cb0f6] flex items-center justify-center flex-shrink-0"
                 onClick={() => {
-                  const utterance = new SpeechSynthesisUtterance(currentExercise.english);
+                  const utterance = new SpeechSynthesisUtterance(currentSentence);
                   utterance.lang = 'en-US';
                   utterance.rate = 0.8;
                   speechSynthesis.speak(utterance);
@@ -213,7 +258,7 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
 
           {/* Destination Row */}
           <div className="mb-8">
-            <div className="min-h-[60px] border-2 border-dashed border-[#e4e4e4] rounded-lg p-4 bg-gray-50">
+            <div className="min-h-[80px] border-2 border-dashed border-[#e4e4e4] rounded-lg p-4 bg-gray-50">
               <div className="flex flex-wrap gap-2">
                 {selectedWords.map((word, index) => (
                   <button
@@ -225,7 +270,9 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
                   </button>
                 ))}
                 {selectedWords.length === 0 && (
-                  <span className="text-gray-400 text-base">Tap the Spanish words...</span>
+                  <span className="text-gray-400 text-base">
+                    {showHarderQuiz ? 'Tap the Spanish words to build the translation...' : 'Tap the Spanish words...'}
+                  </span>
                 )}
               </div>
             </div>
@@ -238,7 +285,7 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
                 <button
                   key={`available-${word}-${index}`}
                   onClick={() => handleWordClick(word, false)}
-                  className="rounded-[15px] border border-[#e4e4e4] bg-white shadow-[0_3px_0_#e4e4e4] px-4 py-2 text-base active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50"
+                  className="rounded-[15px] border border-[#e4e4e4] bg-white shadow-[0_3px_0_#e4e4e4] px-3 py-2 text-sm active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50"
                 >
                   {word}
                 </button>
@@ -249,14 +296,28 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
           {/* Feedback */}
           {result === 'correct' && (
             <div className="mb-4 p-3 bg-green-100 border border-green-300 rounded-lg">
-              <span className="text-green-700 font-semibold">¡Correcto! Great job!</span>
+              <span className="text-green-700 font-semibold">
+                {showHarderQuiz ? '¡Excelente! Perfect advanced translation!' : '¡Correcto! Great job!'}
+              </span>
             </div>
           )}
           {result === 'incorrect' && (
             <div className="mb-4 p-3 bg-red-100 border border-red-300 rounded-lg">
               <span className="text-red-700 font-semibold">Not quite right. Try again!</span>
               <div className="text-sm text-red-600 mt-1">
-                Correct answer: {currentExercise.spanish}
+                Correct answer: {currentCorrectAnswer}
+              </div>
+            </div>
+          )}
+
+          {/* Difficulty Indicator */}
+          {showHarderQuiz && (
+            <div className="mb-4 p-3 bg-orange-100 border border-orange-300 rounded-lg">
+              <div className="flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-orange-600">
+                  <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" fill="currentColor"/>
+                </svg>
+                <span className="text-orange-700 font-semibold text-sm">Advanced Level Challenge</span>
               </div>
             </div>
           )}
@@ -342,9 +403,6 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
             </div>
           </div>
         )}
-
-        {/* Screen8 Overlay */}
-        {showScreen8 && <Screen8 />}
       </div>
     </div>
   );
