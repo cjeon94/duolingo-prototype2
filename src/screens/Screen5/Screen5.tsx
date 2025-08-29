@@ -1,6 +1,10 @@
 // src/screens/Screen5.tsx
 import React from "react";
 import { Screen6 } from "../Screen6/Screen6";
+import OneImg from "../../assets/vocab/one.png";
+import TheManImg from "../../assets/vocab/the-man.png";
+import TheCatImg from "../../assets/vocab/the-cat.png";
+import TheBoyImg from "../../assets/vocab/the-boy.png";
 
 type OptionKey = "one" | "man" | "cat" | "boy";
 
@@ -13,19 +17,19 @@ const COLORS = {
 };
 
 const IconOne = () => (
-  <img src="/vocab/1.svg" alt="one" className="w-16 h-16 object-contain" />
+  <img src={OneImg} alt="one" className="w-16 h-16 object-contain" />
 );
 
 const IconMan = () => (
-  <img src="/vocab/the-man.png" alt="the man" className="w-16 h-16 object-contain" />
+  <img src={TheManImg} alt="the man" className="w-16 h-16 object-contain" />
 );
 
 const IconCat = () => (
-  <img src="/vocab/the-cat.png" alt="the cat" className="w-16 h-16 object-contain" />
+  <img src={TheCatImg} alt="the cat" className="w-16 h-16 object-contain" />
 );
 
 const IconBoy = () => (
-  <img src="/vocab/the-boy.png" alt="the boy" className="w-16 h-16 object-contain" />
+  <img src={TheBoyImg} alt="the boy" className="w-16 h-16 object-contain" />
 );
 
 export default function Screen5(): JSX.Element {
