@@ -13,7 +13,7 @@ const COLORS = {
 };
 
 const IconOne = () => (
-  <img src="/vocab/one.png" alt="one" className="w-16 h-16 object-contain" />
+  <img src="/vocab/1.png" alt="one" className="w-16 h-16 object-contain" />
 );
 
 const IconMan = () => (
