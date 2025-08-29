@@ -388,8 +388,8 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
               <img
                 src={
                   showHarderQuiz
-                    ? "/Duo Character 4.svg"
-                    : "/Duo Character 1.svg"
+                    ? "/duo-character-4.svg"
+                    : "/duo-character-1.svg"
                 }
                 alt="Duo character"
                 className="w-20 sm:w-28 h-20 sm:h-28 object-contain"

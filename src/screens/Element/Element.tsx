@@ -280,7 +280,7 @@ export const Element = (): JSX.Element => {
               <img
                 className="absolute w-48 h-[179px] top-[248px] left-1/2 transform -translate-x-1/2 object-cover animate-sway hover:animate-pulse transition-transform duration-300 hover:scale-105"
                 alt="Image"
-                src={isExiting ? "/excited-owl.gif" : "/Duolingo Hello.gif"}
+                src={isExiting ? "/excited-owl.gif" : "/duolingo-hello.gif"}
               />
             )}
 
@@ -293,7 +293,7 @@ export const Element = (): JSX.Element => {
                   animation: 'moveOwlFromLeft 1s ease-out forwards'
                 }}
                 alt="Cheer owl"
-                src="/cheer-owl.gif"
+                src="/duolingo-cheer-gif-copy.gif"
               />
             )}
 

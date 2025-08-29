@@ -13,15 +13,15 @@ const COLORS = {
 };
 
 const IconOne = () => (
-  <img src="/1.png" alt="one" className="w-16 h-16 object-contain" />
+  <img src="/one.png" alt="one" className="w-16 h-16 object-contain" />
 );
 
 const IconMan = () => (
-  <img src="/man.png" alt="the man" className="w-16 h-16 object-contain" />
+  <img src="/the-man.png" alt="the man" className="w-16 h-16 object-contain" />
 );
 
 const IconCat = () => (
-  <img src="/cat.png" alt="the cat" className="w-16 h-16 object-contain" />
+  <img src="/the-cat.png" alt="the cat" className="w-16 h-16 object-contain" />
 );
 
 const IconBoy = () => (

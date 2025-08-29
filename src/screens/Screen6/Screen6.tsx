@@ -27,11 +27,11 @@ const exercises: Exercise[] = [
 
 export default function Screen6(): JSX.Element {
   const duoCharacters = [
-    "/Duo Character 1.svg",
-    "/Duo Character 2.svg", 
-    "/Duo Character 3.svg",
-    "/Duo Character 4.svg",
-    "/Duo Character 5.svg"
+    "/duo-character-1.svg",
+    "/duo-character-2.svg", 
+    "/duo-character-3.svg",
+    "/duo-character-4.svg",
+    "/duo-character-5.svg"
   ];
   
   const [randomDuoCharacter] = React.useState(() => 

@@ -183,7 +183,7 @@ export default function Screen8(): JSX.Element {
             {/* Character Illustration */}
             <div className="w-20 h-20 flex items-center justify-center flex-shrink-0">
               <img 
-                src="/Duo Character 5.svg" 
+                src="/duo-character-5.svg" 
                 alt="Duo character" 
                 className="w-20 h-20 object-contain"
               />
