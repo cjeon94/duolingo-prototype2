@@ -1,73 +1,27 @@
 import React from "react";
 
-interface TypingExercise {
-  english: string;
-  spanish: string;
-  hint?: string;
-}
-
-const typingExercises: TypingExercise[] = [
-  {
-    english: "Dear Ana, how are you?",
-    spanish: "Querida Ana, ¿cómo estás?",
-    hint: "Remember: 'Querida' for dear (feminine), '¿cómo estás?' for how are you"
-  },
-  {
-    english: "I would like to make a reservation for tonight",
-    spanish: "Me gustaría hacer una reserva para esta noche",
-    hint: "Use 'Me gustaría' for 'I would like'"
-  },
-  {
-    english: "Could you please help me find the nearest hospital?",
-    spanish: "¿Podrías ayudarme a encontrar el hospital más cercano?",
-    hint: "'¿Podrías' means 'could you', 'más cercano' means 'nearest'"
-  },
-  {
-    english: "The weather forecast says it will rain tomorrow",
-    spanish: "El pronóstico del tiempo dice que lloverá mañana",
-    hint: "'pronóstico del tiempo' means weather forecast"
-  },
-  {
-    english: "I need to buy groceries before the store closes",
-    spanish: "Necesito comprar comestibles antes de que cierre la tienda",
-    hint: "'antes de que' means 'before', 'cierre' means 'closes'"
-  }
-];
-
 export default function Screen8(): JSX.Element {
-  const [currentExercise, setCurrentExercise] = React.useState<TypingExercise>(() => 
-    typingExercises[Math.floor(Math.random() * typingExercises.length)]
-  );
   const [userInput, setUserInput] = React.useState("");
   const [isChecked, setIsChecked] = React.useState(false);
   const [result, setResult] = React.useState<'correct' | 'incorrect' | null>(null);
-  const [exerciseCount, setExerciseCount] = React.useState(0);
-  const [showHint, setShowHint] = React.useState(false);
+  
+  const correctAnswer = "Querida Ana, ¿cómo estás?";
+  const englishSentence = "Dear Ana, how are you?";
 
-  // Auto-play audio when component mounts or exercise changes
+  // Auto-play audio when component mounts
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      const utterance = new SpeechSynthesisUtterance(currentExercise.english);
+      const utterance = new SpeechSynthesisUtterance(englishSentence);
       utterance.lang = 'en-US';
       utterance.rate = 0.8;
       speechSynthesis.speak(utterance);
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [currentExercise.english]);
+  }, []);
 
   const handleCheck = () => {
-    const userAnswer = userInput.trim();
-    const correctAnswer = currentExercise.spanish;
-    
-    // More flexible matching - normalize punctuation and case
-    const normalizeText = (text: string) => 
-      text.toLowerCase()
-          .replace(/[¿¡]/g, '') // Remove Spanish question/exclamation marks
-          .replace(/[.,!?]/g, '') // Remove punctuation
-          .trim();
-    
-    const isCorrect = normalizeText(userAnswer) === normalizeText(correctAnswer);
+    const isCorrect = userInput.trim().toLowerCase() === correctAnswer.toLowerCase();
     setResult(isCorrect ? 'correct' : 'incorrect');
     setIsChecked(true);
     
@@ -76,17 +30,6 @@ export default function Screen8(): JSX.Element {
       correctSound.play().catch(() => {
         console.log("Could not play correct answer sound");
       });
-      
-      // Move to next exercise after 2 seconds
-      setTimeout(() => {
-        const nextExercise = typingExercises[Math.floor(Math.random() * typingExercises.length)];
-        setCurrentExercise(nextExercise);
-        setUserInput("");
-        setIsChecked(false);
-        setResult(null);
-        setShowHint(false);
-        setExerciseCount(prev => prev + 1);
-      }, 2000);
     } else {
       const incorrectSound = new Audio("https://raw.githubusercontent.com/cjeon94/duolingo-sound-assets/main/Voicy_Bad%20answer.mp3");
       incorrectSound.play().catch(() => {
@@ -95,33 +38,21 @@ export default function Screen8(): JSX.Element {
     }
   };
 
-  const handleSkip = () => {
-    const nextExercise = typingExercises[Math.floor(Math.random() * typingExercises.length)];
-    setCurrentExercise(nextExercise);
-    setUserInput("");
-    setIsChecked(false);
-    setResult(null);
-    setShowHint(false);
-    setExerciseCount(prev => prev + 1);
-  };
-
   const handleMicrophoneClick = () => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new SpeechRecognition();
       
       recognition.lang = 'es-ES';
       recognition.continuous = false;
       recognition.interimResults = false;
       
-      recognition.onresult = (event: any) => {
+      recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         setUserInput(transcript);
-        setIsChecked(false);
-        setResult(null);
       };
       
-      recognition.onerror = (event: any) => {
+      recognition.onerror = (event) => {
         console.log('Speech recognition error:', event.error);
       };
       
@@ -130,9 +61,6 @@ export default function Screen8(): JSX.Element {
       alert('Speech recognition not supported in this browser');
     }
   };
-
-  const progressPercentage = Math.min(70 + (exerciseCount * 5), 100);
-  const levelNumber = 10 + exerciseCount;
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -156,19 +84,16 @@ export default function Screen8(): JSX.Element {
             </svg>
           </button>
           <div className="flex-1 h-3 bg-[#e5e7eb] rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-[#58cc02] rounded-full transition-all duration-500"
-              style={{ width: `${progressPercentage}%` }}
-            ></div>
+            <div className="w-3/5 h-full bg-[#58cc02] rounded-full"></div>
           </div>
         </div>
 
         {/* Level Indicator */}
         <div className="flex items-center gap-3 px-6 mb-8">
-          <div className="w-8 h-8 bg-[#ff6b35] rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-sm">{levelNumber}</span>
+          <div className="w-8 h-8 bg-[#ce82ff] rounded-full flex items-center justify-center">
+            <span className="text-white font-bold text-sm">6</span>
           </div>
-          <span className="text-[#ff6b35] font-bold text-sm tracking-wider">ADVANCED {levelNumber}</span>
+          <span className="text-[#ce82ff] font-bold text-sm tracking-wider">LEVEL 6</span>
         </div>
 
         {/* Main Content */}
@@ -183,7 +108,7 @@ export default function Screen8(): JSX.Element {
             {/* Character Illustration */}
             <div className="w-20 h-20 flex items-center justify-center flex-shrink-0">
               <img 
-                src="/Duo Character 5.svg" 
+                src="/Duo Character 3.svg" 
                 alt="Duo character" 
                 className="w-20 h-20 object-contain"
               />
@@ -201,7 +126,7 @@ export default function Screen8(): JSX.Element {
                   <button
                     className="w-10 h-10 rounded-xl border-0 p-0 shadow-md bg-[#1cb0f6] flex items-center justify-center flex-shrink-0"
                     onClick={() => {
-                      const utterance = new SpeechSynthesisUtterance(currentExercise.english);
+                      const utterance = new SpeechSynthesisUtterance(englishSentence);
                       utterance.lang = 'en-US';
                       utterance.rate = 0.8;
                       speechSynthesis.speak(utterance);
@@ -214,7 +139,7 @@ export default function Screen8(): JSX.Element {
                   </button>
                   
                   <p className="text-[#4b4b4b] text-base font-medium">
-                    {currentExercise.english}
+                    Dear Ana, how are you?
                   </p>
                 </div>
               </div>
@@ -222,7 +147,7 @@ export default function Screen8(): JSX.Element {
           </div>
 
           {/* Text Input */}
-          <div className="mb-6">
+          <div className="mb-8">
             <div className="relative">
               <input
                 type="text"
@@ -250,31 +175,6 @@ export default function Screen8(): JSX.Element {
             </div>
           </div>
 
-          {/* Hint Button */}
-          {currentExercise.hint && (
-            <div className="mb-6">
-              <button
-                onClick={() => setShowHint(!showHint)}
-                className="flex items-center gap-2 text-[#1cb0f6] hover:text-[#0ea5e9] transition-colors"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M12 17h.01" stroke="currentColor" strokeWidth="2"/>
-                </svg>
-                <span className="text-sm font-medium">
-                  {showHint ? 'Hide hint' : 'Show hint'}
-                </span>
-              </button>
-              
-              {showHint && (
-                <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-blue-700 text-sm">{currentExercise.hint}</p>
-                </div>
-              )}
-            </div>
-          )}
-
           {/* Feedback */}
           {result === 'correct' && (
             <div className="mb-4 p-3 bg-green-100 border border-green-300 rounded-lg">
@@ -285,53 +185,25 @@ export default function Screen8(): JSX.Element {
             <div className="mb-4 p-3 bg-red-100 border border-red-300 rounded-lg">
               <span className="text-red-700 font-semibold">Not quite right. Try again!</span>
               <div className="text-sm text-red-600 mt-1">
-                Correct answer: {currentExercise.spanish}
+                Correct answer: {correctAnswer}
               </div>
             </div>
           )}
-
-          {/* Advanced Level Indicator */}
-          <div className="mb-4 p-3 bg-orange-100 border border-orange-300 rounded-lg">
-            <div className="flex items-center gap-2">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-orange-600">
-                <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" fill="currentColor"/>
-              </svg>
-              <span className="text-orange-700 font-semibold text-sm">Advanced Typing Challenge</span>
-            </div>
-          </div>
-
-          {/* Exercise Counter */}
-          <div className="text-center mb-4">
-            <span className="text-sm text-gray-500">
-              Exercise {exerciseCount + 1} • Advanced Level
-            </span>
-          </div>
         </div>
 
         {/* Footer Bar */}
         <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
-          <div className="flex gap-4">
-            {/* Skip Button */}
-            <button
-              onClick={handleSkip}
-              className="flex-1 h-12 rounded-xl border-2 border-gray-300 bg-white shadow-[0_3px_0_#d1d5db] text-gray-600 font-semibold active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50"
-            >
-              SKIP
-            </button>
-            
-            {/* Check Button */}
-            <button
-              onClick={handleCheck}
-              disabled={userInput.trim().length === 0}
-              className="flex-1 h-12 rounded-xl text-white font-semibold active:translate-y-[2px] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{
-                backgroundColor: userInput.trim().length > 0 ? '#2ec748' : '#86efac',
-                boxShadow: userInput.trim().length > 0 ? '0 3px 0 #27aa3d' : '0 3px 0 #6ee7b7'
-              }}
-            >
-              CHECK
-            </button>
-          </div>
+          <button
+            onClick={handleCheck}
+            disabled={userInput.trim().length === 0}
+            className="w-full h-12 rounded-xl text-white font-semibold active:translate-y-[2px] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              backgroundColor: userInput.trim().length > 0 ? '#2ec748' : '#86efac',
+              boxShadow: userInput.trim().length > 0 ? '0 3px 0 #27aa3d' : '0 3px 0 #6ee7b7'
+            }}
+          >
+            CHECK
+          </button>
         </div>
 
         {/* Home Indicator */}
