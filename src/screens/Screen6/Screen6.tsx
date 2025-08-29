@@ -119,12 +119,11 @@ export default function Screen6(): JSX.Element {
   const englishTokens = exercise.english.split(' ');
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      {/* Main Canvas */}
-      <div className="relative w-[390px] h-[844px] bg-white rounded-xl shadow-lg overflow-hidden">
+    <div className="min-h-screen bg-white">
+      <div className="relative w-full min-h-screen bg-white overflow-hidden">
         
         {/* Status Bar */}
-        <div className="flex justify-between items-center px-4 py-3 h-[54px]">
+        <div className="flex justify-between items-center px-4 py-3 h-[54px] safe-area-top">
           <div className="text-[17px] font-semibold text-[#454a53]">9:41</div>
           <div className="flex items-center gap-1">
             <div className="w-4 h-3 bg-[#454a53] rounded-sm"></div>
@@ -153,27 +152,27 @@ export default function Screen6(): JSX.Element {
         </div>
 
         {/* Main Content */}
-        <div className="px-6 pb-32">
+        <div className="px-4 pb-32">
           {/* Title */}
-          <h1 className="text-2xl font-bold text-[#4b4b4b] mb-8">
+          <h1 className="text-xl sm:text-2xl font-bold text-[#4b4b4b] mb-6 sm:mb-8">
             Write this in Spanish
           </h1>
 
           {/* Top Row - Duo and English Sentence */}
-          <div className="flex items-center gap-4 mb-8">
+          <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
             {/* Duo Character */}
-            <div className="w-28 h-28 flex items-center justify-center flex-shrink-0">
+            <div className="w-20 sm:w-28 h-20 sm:h-28 flex items-center justify-center flex-shrink-0">
               <img 
                 src={randomDuoCharacter} 
                 alt="Duo character" 
-                className="w-28 h-28 object-contain"
+                className="w-20 sm:w-28 h-20 sm:h-28 object-contain"
               />
             </div>
             
             {/* Audio Button and English Sentence */}
-            <div className="flex items-center gap-3 flex-1">
+            <div className="flex items-center gap-2 sm:gap-3 flex-1">
               <button
-                className="w-12 h-12 rounded-xl border-0 p-0 shadow-md bg-[#1cb0f6] flex items-center justify-center flex-shrink-0"
+                className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl border-0 p-0 shadow-md bg-[#1cb0f6] flex items-center justify-center flex-shrink-0"
                 onClick={() => {
                   const utterance = new SpeechSynthesisUtterance(exercise.english);
                   utterance.lang = 'en-US';
@@ -181,18 +180,18 @@ export default function Screen6(): JSX.Element {
                   speechSynthesis.speak(utterance);
                 }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="sm:w-5 sm:h-5">
                   <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M19.07 4.93A10 10 0 0 1 19.07 19.07M15.54 8.46A5 5 0 0 1 15.54 15.54" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
               
               {/* English Sentence as Tokens */}
-              <div className="flex flex-wrap gap-1">
+              <div className="flex flex-wrap gap-1 flex-1">
                 {englishTokens.map((token, index) => (
                   <span
                     key={index}
-                    className="inline-block border-b-2 border-dashed border-[#bdbdbd] mr-1 text-base text-[#4b4b4b]"
+                    className="inline-block border-b-2 border-dashed border-[#bdbdbd] mr-1 text-sm sm:text-base text-[#4b4b4b]"
                   >
                     {token}
                   </span>
@@ -203,19 +202,19 @@ export default function Screen6(): JSX.Element {
 
           {/* Destination Row */}
           <div className="mb-8">
-            <div className="min-h-[60px] border-2 border-dashed border-[#e4e4e4] rounded-lg p-4 bg-gray-50">
+            <div className="min-h-[60px] border-2 border-dashed border-[#e4e4e4] rounded-lg p-3 sm:p-4 bg-gray-50">
               <div className="flex flex-wrap gap-2">
                 {selectedWords.map((word, index) => (
                   <button
                     key={`selected-${word}-${index}`}
                     onClick={() => handleWordClick(word, true)}
-                    className="rounded-[15px] border border-[#e4e4e4] bg-white shadow-[0_3px_0_#e4e4e4] px-4 py-2 text-base active:translate-y-[2px] active:shadow-none transition-all"
+                    className="rounded-[15px] border border-[#e4e4e4] bg-white shadow-[0_3px_0_#e4e4e4] px-3 sm:px-4 py-2 text-sm sm:text-base active:translate-y-[2px] active:shadow-none transition-all"
                   >
                     {word}
                   </button>
                 ))}
                 {selectedWords.length === 0 && (
-                  <span className="text-gray-400 text-base">Tap the Spanish words...</span>
+                  <span className="text-gray-400 text-sm sm:text-base">Tap the Spanish words...</span>
                 )}
               </div>
             </div>
@@ -228,7 +227,7 @@ export default function Screen6(): JSX.Element {
                 <button
                   key={`available-${word}-${index}`}
                   onClick={() => handleWordClick(word, false)}
-                  className="rounded-[15px] border border-[#e4e4e4] bg-white shadow-[0_3px_0_#e4e4e4] px-4 py-2 text-base active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50"
+                  className="rounded-[15px] border border-[#e4e4e4] bg-white shadow-[0_3px_0_#e4e4e4] px-3 sm:px-4 py-2 text-sm sm:text-base active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50"
                 >
                   {word}
                 </button>
@@ -254,11 +253,12 @@ export default function Screen6(): JSX.Element {
 
         {/* Footer Bar */}
         <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
+        <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 safe-area-bottom">
           <div className="flex gap-4">
             {/* Skip Button */}
             <button
               onClick={handleSkip}
-              className="flex-1 h-12 rounded-xl border-2 border-gray-300 bg-white shadow-[0_3px_0_#d1d5db] text-gray-600 font-semibold active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50"
+              className="flex-1 h-12 rounded-xl border-2 border-gray-300 bg-white shadow-[0_3px_0_#d1d5db] text-gray-600 font-semibold active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50 text-sm sm:text-base"
             >
               SKIP
             </button>
@@ -267,7 +267,7 @@ export default function Screen6(): JSX.Element {
             <button
               onClick={handleCheck}
               disabled={selectedWords.length === 0}
-              className="flex-1 h-12 rounded-xl text-white font-semibold active:translate-y-[2px] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 h-12 rounded-xl text-white font-semibold active:translate-y-[2px] transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
               style={{
                 backgroundColor: selectedWords.length > 0 ? '#2ec748' : '#86efac',
                 boxShadow: selectedWords.length > 0 ? '0 3px 0 #27aa3d' : '0 3px 0 #6ee7b7'
@@ -279,7 +279,7 @@ export default function Screen6(): JSX.Element {
         </div>
 
         {/* Home Indicator */}
-        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 hidden sm:block">
           <div className="w-[134px] h-[5px] bg-black rounded-full"></div>
         </div>
 
