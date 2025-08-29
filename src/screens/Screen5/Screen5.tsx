@@ -13,19 +13,19 @@ const COLORS = {
 };
 
 const IconOne = () => (
-  <img src="/one.png" alt="one" className="w-16 h-16 object-contain" />
+  <img src="/vocab/one.png" alt="one" className="w-16 h-16 object-contain" />
 );
 
 const IconMan = () => (
-  <img src="/the-man.png" alt="the man" className="w-16 h-16 object-contain" />
+  <img src="/vocab/the-man.png" alt="the man" className="w-16 h-16 object-contain" />
 );
 
 const IconCat = () => (
-  <img src="/the-cat.png" alt="the cat" className="w-16 h-16 object-contain" />
+  <img src="/vocab/the-cat.png" alt="the cat" className="w-16 h-16 object-contain" />
 );
 
 const IconBoy = () => (
-  <img src="/the-boy.png" alt="the boy" className="w-16 h-16 object-contain" />
+  <img src="/vocab/the-boy.png" alt="the boy" className="w-16 h-16 object-contain" />
 );
 
 export default function Screen5(): JSX.Element {
