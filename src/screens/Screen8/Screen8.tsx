@@ -135,11 +135,12 @@ export default function Screen8(): JSX.Element {
   const levelNumber = 10 + exerciseCount;
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="relative w-full min-h-screen bg-white overflow-hidden">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      {/* Main Canvas */}
+      <div className="relative w-[390px] h-[844px] bg-white rounded-xl shadow-lg overflow-hidden">
         
         {/* Status Bar */}
-        <div className="flex justify-between items-center px-4 py-3 h-[54px] safe-area-top">
+        <div className="flex justify-between items-center px-4 py-3 h-[54px]">
           <div className="text-[17px] font-semibold text-[#454a53]">9:41</div>
           <div className="flex items-center gap-1">
             <div className="w-4 h-3 bg-[#454a53] rounded-sm"></div>
@@ -171,34 +172,34 @@ export default function Screen8(): JSX.Element {
         </div>
 
         {/* Main Content */}
-        <div className="px-4 pb-32">
+        <div className="px-6 pb-32">
           {/* Title */}
-          <h1 className="text-xl sm:text-2xl font-bold text-[#4b4b4b] mb-6 sm:mb-8">
+          <h1 className="text-2xl font-bold text-[#4b4b4b] mb-8">
             Translate this sentence
           </h1>
 
           {/* Character and Speech Bubble Row */}
-          <div className="flex items-start gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div className="flex items-start gap-4 mb-8">
             {/* Character Illustration */}
-            <div className="w-16 sm:w-20 h-16 sm:h-20 flex items-center justify-center flex-shrink-0">
+            <div className="w-20 h-20 flex items-center justify-center flex-shrink-0">
               <img 
                 src="/Duo Character 5.svg" 
                 alt="Duo character" 
-                className="w-16 sm:w-20 h-16 sm:h-20 object-contain"
+                className="w-20 h-20 object-contain"
               />
             </div>
             
             {/* Speech Bubble */}
             <div className="flex-1 relative">
-              <div className="bg-white border-2 border-[#e4e4e4] rounded-2xl p-3 sm:p-4 shadow-sm relative">
+              <div className="bg-white border-2 border-[#e4e4e4] rounded-2xl p-4 shadow-sm relative">
                 {/* Speech bubble tail */}
                 <div className="absolute left-[-8px] top-4 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[8px] border-r-[#e4e4e4]"></div>
                 <div className="absolute left-[-6px] top-4 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[8px] border-r-white"></div>
                 
                 {/* Audio Button and Text */}
-                <div className="flex items-center gap-2 sm:gap-3">
+                <div className="flex items-center gap-3">
                   <button
-                    className="w-8 sm:w-10 h-8 sm:h-10 rounded-xl border-0 p-0 shadow-md bg-[#1cb0f6] flex items-center justify-center flex-shrink-0"
+                    className="w-10 h-10 rounded-xl border-0 p-0 shadow-md bg-[#1cb0f6] flex items-center justify-center flex-shrink-0"
                     onClick={() => {
                       const utterance = new SpeechSynthesisUtterance(currentExercise.english);
                       utterance.lang = 'en-US';
@@ -206,13 +207,13 @@ export default function Screen8(): JSX.Element {
                       speechSynthesis.speak(utterance);
                     }}
                   >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="sm:w-4 sm:h-4">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                       <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       <path d="M19.07 4.93A10 10 0 0 1 19.07 19.07M15.54 8.46A5 5 0 0 1 15.54 15.54" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </button>
                   
-                  <p className="text-[#4b4b4b] text-sm sm:text-base font-medium">
+                  <p className="text-[#4b4b4b] text-base font-medium">
                     {currentExercise.english}
                   </p>
                 </div>
@@ -221,7 +222,7 @@ export default function Screen8(): JSX.Element {
           </div>
 
           {/* Text Input */}
-          <div className="mb-4 sm:mb-6">
+          <div className="mb-6">
             <div className="relative">
               <input
                 type="text"
@@ -232,15 +233,15 @@ export default function Screen8(): JSX.Element {
                   setResult(null);
                 }}
                 placeholder="Type in Spanish"
-                className="w-full h-12 sm:h-14 px-3 sm:px-4 pr-10 sm:pr-12 text-sm sm:text-base border-2 border-[#e4e4e4] rounded-2xl bg-white shadow-sm focus:border-[#1cb0f6] focus:outline-none transition-colors"
+                className="w-full h-14 px-4 pr-12 text-base border-2 border-[#e4e4e4] rounded-2xl bg-white shadow-sm focus:border-[#1cb0f6] focus:outline-none transition-colors"
               />
               
               {/* Microphone Icon */}
               <button
                 onClick={handleMicrophoneClick}
-                className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 w-6 sm:w-8 h-6 sm:h-8 flex items-center justify-center text-[#6b7280] hover:text-[#1cb0f6] transition-colors"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 w-8 h-8 flex items-center justify-center text-[#6b7280] hover:text-[#1cb0f6] transition-colors"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="sm:w-5 sm:h-5">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path d="M12 1C10.34 1 9 2.34 9 4V12C9 13.66 10.34 15 12 15S15 13.66 15 12V4C15 2.34 13.66 1 12 1Z" stroke="currentColor" strokeWidth="2"/>
                   <path d="M19 10V12C19 16.42 15.42 20 11 20H13C17.42 20 21 16.42 21 12V10" stroke="currentColor" strokeWidth="2"/>
                   <path d="M12 20V24M8 24H16" stroke="currentColor" strokeWidth="2"/>
@@ -251,24 +252,24 @@ export default function Screen8(): JSX.Element {
 
           {/* Hint Button */}
           {currentExercise.hint && (
-            <div className="mb-4 sm:mb-6">
+            <div className="mb-6">
               <button
                 onClick={() => setShowHint(!showHint)}
                 className="flex items-center gap-2 text-[#1cb0f6] hover:text-[#0ea5e9] transition-colors"
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="sm:w-4 sm:h-4">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                   <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
                   <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="currentColor" strokeWidth="2"/>
                   <path d="M12 17h.01" stroke="currentColor" strokeWidth="2"/>
                 </svg>
-                <span className="text-xs sm:text-sm font-medium">
+                <span className="text-sm font-medium">
                   {showHint ? 'Hide hint' : 'Show hint'}
                 </span>
               </button>
               
               {showHint && (
                 <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-blue-700 text-xs sm:text-sm">{currentExercise.hint}</p>
+                  <p className="text-blue-700 text-sm">{currentExercise.hint}</p>
                 </div>
               )}
             </div>
@@ -308,12 +309,12 @@ export default function Screen8(): JSX.Element {
         </div>
 
         {/* Footer Bar */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 safe-area-bottom">
+        <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
           <div className="flex gap-4">
             {/* Skip Button */}
             <button
               onClick={handleSkip}
-              className="flex-1 h-12 rounded-xl border-2 border-gray-300 bg-white shadow-[0_3px_0_#d1d5db] text-gray-600 font-semibold active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50 text-sm sm:text-base"
+              className="flex-1 h-12 rounded-xl border-2 border-gray-300 bg-white shadow-[0_3px_0_#d1d5db] text-gray-600 font-semibold active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50"
             >
               SKIP
             </button>
@@ -322,7 +323,7 @@ export default function Screen8(): JSX.Element {
             <button
               onClick={handleCheck}
               disabled={userInput.trim().length === 0}
-              className="flex-1 h-12 rounded-xl text-white font-semibold active:translate-y-[2px] transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+              className="flex-1 h-12 rounded-xl text-white font-semibold active:translate-y-[2px] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 backgroundColor: userInput.trim().length > 0 ? '#2ec748' : '#86efac',
                 boxShadow: userInput.trim().length > 0 ? '0 3px 0 #27aa3d' : '0 3px 0 #6ee7b7'
@@ -334,7 +335,7 @@ export default function Screen8(): JSX.Element {
         </div>
 
         {/* Home Indicator */}
-        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 hidden sm:block">
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
           <div className="w-[134px] h-[5px] bg-black rounded-full"></div>
         </div>
       </div>

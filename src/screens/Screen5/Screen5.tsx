@@ -88,11 +88,12 @@ export default function Screen5(): JSX.Element {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="relative w-full min-h-screen bg-white overflow-hidden">
+    <div className="min-h-screen grid place-items-center bg-slate-50 p-4">
+      {/* phone canvas */}
+      <div className="relative w-[390px] h-[844px] bg-white rounded-xl border border-slate-200 overflow-hidden">
         {/* status bar */}
-        <div className="absolute top-0 left-0 right-0 h-[54px] px-4">
-          <div className="absolute left-4 top-[17px] text-[17px] text-[#454a53]">9:41</div>
+        <div className="absolute top-0 left-0 right-0 h-[54px]">
+          <div className="absolute left-[52px] top-[17px] text-[17px] text-[#454a53]">9:41</div>
           <div className="absolute right-4 top-[17px] h-5 w-20 rounded bg-slate-200" />
         </div>
 
@@ -122,7 +123,7 @@ export default function Screen5(): JSX.Element {
           {/* audio row */}
           <div className="flex items-center gap-3 mb-6">
             <button
-              className="w-12 h-12 rounded-xl border-0 p-0 shadow-md bg-[#1cb0f6] flex items-center justify-center flex-shrink-0"
+              className="w-12 h-12 rounded-xl border-0 p-0 shadow-md bg-[#1cb0f6] flex items-center justify-center"
               onClick={() => {
                 // Try to play audio file first, fallback to text-to-speech
                 const audio = new Audio("/uno.mp3");
@@ -146,7 +147,7 @@ export default function Screen5(): JSX.Element {
           </div>
 
           {/* options */}
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 gap-4">
             {options.map(({ key, label, Icon }) => {
               const active = selected === key;
               const correct = checked && key === correctKey;
@@ -160,19 +161,18 @@ export default function Screen5(): JSX.Element {
                     setSelected(key);
                     setChecked(false);
                   }}
-                  className={`rounded-2xl p-3 sm:p-4 text-left bg-white shadow-sm border transition ${
-                    active ? "ring-2 ring-sky-400 border-sky-300" : "border-[#e6e6e6]"
-                  } ${
-                    correct ? "ring-2 ring-emerald-500" : ""
-                  } ${
-                    wrong ? "ring-2 ring-rose-500" : ""
-                  }`}
+                  className={[
+                    "rounded-2xl p-4 text-left bg-white shadow-sm border transition",
+                    active ? "ring-2 ring-sky-400 border-sky-300" : "border-[#e6e6e6]",
+                    correct ? "ring-2 ring-emerald-500" : "",
+                    wrong ? "ring-2 ring-rose-500" : "",
+                  ].join(" ")}
                 >
                   <div className="grid gap-2 place-items-center">
                     <Icon />
                     <div
                       className={
-                        key === "one" ? "text-xs sm:text-sm font-medium text-[#1cb0f6]" : "text-xs sm:text-sm text-slate-600"
+                        key === "one" ? "text-sm font-medium text-[#1cb0f6]" : "text-sm text-slate-600"
                       }
                     >
                       {label}
@@ -199,7 +199,7 @@ export default function Screen5(): JSX.Element {
         {/* bottom actions */}
         <div className="absolute left-4 right-4 bottom-[48px]">
           <button
-            className="w-full h-12 rounded-xl text-white font-semibold tracking-wide disabled:opacity-60 bg-[#58cc02] text-sm sm:text-base"
+            className="w-full h-12 rounded-xl text-white font-semibold tracking-wide disabled:opacity-60 bg-[#58cc02]"
             disabled={!selected}
             onClick={handleCheck}
           >
@@ -208,7 +208,7 @@ export default function Screen5(): JSX.Element {
         </div>
 
         {/* home indicator */}
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-2 w-[139px] h-[5px] rounded-full bg-black/90 hidden sm:block" />
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-2 w-[139px] h-[5px] rounded-full bg-black/90" />
       </div>
     </div>
   );

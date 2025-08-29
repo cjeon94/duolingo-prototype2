@@ -110,32 +110,31 @@ export const Element = (): JSX.Element => {
   }
 
   return (
-    <div className="bg-white min-h-screen w-full" onClick={handleScreen3Click}>
-      <div className="bg-white overflow-hidden w-full min-h-screen">
-        <div className="relative w-full min-h-screen">
+    <div className="bg-white grid justify-items-center [align-items:start] w-screen" onClick={handleScreen3Click}>
+      <div className="bg-white overflow-hidden w-[390px] h-[844px]">
+        <div className="relative w-[392px] h-[844px] -left-px">
           <header className="absolute w-[390px] h-[54px] top-0 left-px">
-          <header className="absolute w-full h-[54px] top-0 left-0 px-4">
             <div className="absolute w-[139px] h-[54px] top-0 left-0">
-              <div className="absolute w-[37px] top-[17px] left-[16px] [font-family:'SF_Pro-Semibold',Helvetica] font-normal text-[#454a53] text-[17px] text-center tracking-[0] leading-[22px] whitespace-nowrap">
+              <div className="absolute w-[37px] top-[17px] left-[52px] [font-family:'SF_Pro-Semibold',Helvetica] font-normal text-[#454a53] text-[17px] text-center tracking-[0] leading-[22px] whitespace-nowrap">
                 9:41
               </div>
             </div>
 
             <img
-              className="absolute w-[139px] h-[54px] top-0 right-4"
+              className="absolute w-[139px] h-[54px] top-0 left-[251px]"
               alt="Levels"
               src="/levels.svg"
             />
           </header>
 
-          <nav className="flex items-center justify-between px-4 py-0 absolute top-16 left-0 right-0">
+          <nav className="inline-flex items-center gap-[65px] px-4 py-0 absolute top-16 left-0">
             <div className="relative w-[35.57px] h-[25.14px] rounded-lg -rotate-1 [background:url(..//image-4.png)_50%_50%_/_cover]" />
 
-            <div className="flex items-center gap-8 relative">
+            <div className="inline-flex items-center gap-[63px] relative flex-[0_0_auto]">
               {statsData.map((stat, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-1 relative"
+                  className="inline-flex items-center gap-1 relative flex-[0_0_auto]"
                 >
                   <img
                     className="relative flex-[0_0_auto]"
@@ -155,9 +154,8 @@ export const Element = (): JSX.Element => {
             </div>
           </nav>
 
-          <Card className="flex items-center gap-0.5 absolute top-[106px] left-4 right-4 rounded-[14px] overflow-hidden shadow-[0px_4px_0px_#48a502] border-0">
+          <Card className="inline-flex items-center gap-0.5 absolute top-[106px] left-[17px] rounded-[14px] overflow-hidden shadow-[0px_4px_0px_#48a502] border-0">
             <CardContent className="flex flex-col w-[307px] items-start gap-2.5 px-4 py-[15px] relative mt-[-2.00px] mb-[-2.00px] ml-[-2.00px] bg-[#5acd05] border-r-2 [border-right-style:solid] border-[#43a601]">
-            <CardContent className="flex flex-col flex-1 items-start gap-2.5 px-4 py-[15px] relative mt-[-2.00px] mb-[-2.00px] ml-[-2.00px] bg-[#5acd05] border-r-2 [border-right-style:solid] border-[#43a601]">
               <div className="flex flex-col items-start relative self-stretch w-full flex-[0_0_auto]">
                 <div className="relative self-stretch mt-[-1.00px] font-global-tokens-body-b-7 font-[number:var(--global-tokens-body-b-7-font-weight)] text-[#cef2ad] text-[length:var(--global-tokens-body-b-7-font-size)] tracking-[var(--global-tokens-body-b-7-letter-spacing)] leading-[var(--global-tokens-body-b-7-line-height)] [font-style:var(--global-tokens-body-b-7-font-style)]">
                   SECTION ?, UNIT ?
@@ -176,11 +174,9 @@ export const Element = (): JSX.Element => {
             />
           </Card>
 
-          <main className="absolute w-full top-48 left-0 right-0 px-4">
+          <main className="absolute w-[390px] h-[587px] top-48 left-px">
             <div className="absolute w-[301px] h-[261px] top-[146px] left-[83px]">
-            <div className="relative w-full flex justify-center top-[146px]">
               <div className="absolute w-[271px] h-[261px] top-0 left-[30px]">
-              <div className="relative w-[271px] h-[261px]">
                 <div className="absolute w-[205px] h-[205px] top-7 left-[66px]">
                   <img
                     className="w-full h-full"
@@ -207,7 +203,6 @@ export const Element = (): JSX.Element => {
               </div>
 
               <div className="absolute w-20 h-[95px] top-[85px] left-0">
-              <div className="absolute w-20 h-[95px] top-[85px] left-[-30px]">
                 <img
                   className="w-full h-full"
                   alt="Duo's wing"
@@ -216,7 +211,7 @@ export const Element = (): JSX.Element => {
               </div>
             </div>
 
-            <div className={`flex w-[98px] h-[93px] items-start absolute top-[42px] left-1/2 transform -translate-x-1/2 ${isScreen4 ? 'z-50' : ''}`}>
+            <div className={`flex w-[98px] h-[93px] items-start absolute top-[42px] left-36 ${isScreen4 ? 'z-50' : ''}`}>
               <div className="inline-flex items-start p-3.5 relative flex-[0_0_auto]">
                 <img
                   className="absolute w-[98px] h-[93px] top-0 left-0"
@@ -245,7 +240,7 @@ export const Element = (): JSX.Element => {
               </div>
             </div>
 
-            <div className="absolute w-[134px] h-[159px] top-[419px] left-1/2 transform -translate-x-1/2">
+            <div className="absolute w-[134px] h-[159px] top-[419px] left-[158px]">
               <img
                 className="absolute w-20 h-[95px] top-16 left-[54px]"
                 alt="Frame"
@@ -260,13 +255,13 @@ export const Element = (): JSX.Element => {
             </div>
           </main>
 
-          <div className="flex w-[205px] items-start absolute top-[341px] left-1/2 transform -translate-x-1/2">
+          <div className="flex w-[205px] items-start absolute top-[341px] left-[180px]">
             <div className="flex items-start justify-center relative flex-1 grow">
               <div className="relative w-[205px] h-[260.75px]" />
             </div>
           </div>
 
-          <footer className="flex flex-col w-full items-start gap-2.5 px-3 py-[11px] absolute bottom-0 left-0 bg-white border-t-2 [border-top-style:solid] border-[#e6e3e6]">
+          <footer className="flex flex-col w-[390px] items-start gap-2.5 px-3 py-[11px] absolute top-[755px] left-px bg-white border-t-2 [border-top-style:solid] border-[#e6e3e6]">
             <img
               className="relative self-stretch w-full flex-[0_0_auto]"
               alt="Frame"
@@ -274,16 +269,16 @@ export const Element = (): JSX.Element => {
             />
           </footer>
 
-          <div className="absolute w-full h-[21px] bottom-0 left-0">
-            <div className="relative w-[139px] h-[5px] top-2 left-1/2 transform -translate-x-1/2 bg-black rounded-full" />
+          <div className="absolute w-[390px] h-[21px] top-[823px] left-px">
+            <div className="relative w-[139px] h-[5px] top-2 left-[125px] bg-black rounded-full rotate-180" />
           </div>
 
-          <div className="absolute w-full h-full top-0 left-0 bg-[#000000b2]">
+          <div className="absolute w-[390px] h-[844px] top-0 left-px bg-[#000000b2]">
             {isExiting && !isScreen4 && <Confetti />}
             
             {!isScreen4 && (
               <img
-                className="absolute w-48 h-[179px] top-[248px] left-1/2 transform -translate-x-1/2 object-cover animate-sway hover:animate-pulse transition-transform duration-300 hover:scale-105"
+                className="absolute w-48 h-[179px] top-[248px] left-[118px] object-cover animate-sway hover:animate-pulse transition-transform duration-300 hover:scale-105"
                 alt="Image"
                 src={isExiting ? "/excited-owl.gif" : "/Duolingo Hello.gif"}
               />
@@ -292,9 +287,9 @@ export const Element = (): JSX.Element => {
             {/* Screen 4: Owl moving down below start button */}
             {isScreen4 && (
               <img
-                className="absolute w-48 h-[179px] top-[450px] left-1/2 transform -translate-x-1/2 object-cover animate-bounce-gentle transition-all duration-1000 ease-out"
+                className="absolute w-48 h-[179px] top-[450px] left-[98px] object-cover animate-bounce-gentle transition-all duration-1000 ease-out"
                 style={{
-                  transform: 'translateX(-50%) translateX(-300px)',
+                  transform: 'translateX(-300px)',
                   animation: 'moveOwlFromLeft 1s ease-out forwards'
                 }}
                 alt="Cheer owl"
@@ -305,7 +300,6 @@ export const Element = (): JSX.Element => {
             {/* Screen 4 Message Bubble */}
             {isScreen4 && (
               <Card className="absolute w-[246px] h-[111px] top-[360px] left-[73px] border-0">
-              <Card className="absolute w-[246px] h-[111px] top-[360px] left-1/2 transform -translate-x-1/2 border-0">
                 <CardContent className="relative w-[244px] h-[111px] bg-[url(/union.svg)] bg-[100%_100%] p-0">
                   <div className="absolute w-[219px] h-[78px] top-[16px] left-[19px] font-global-tokens-headings-h-7 font-[number:var(--global-tokens-headings-h-7-font-weight)] text-[#4b4b4b] text-[length:var(--global-tokens-headings-h-7-font-size)] tracking-[var(--global-tokens-headings-h-7-letter-spacing)] leading-[var(--global-tokens-headings-h-7-line-height)] [font-style:var(--global-tokens-headings-h-7-font-style)]">
                     <div>
@@ -320,7 +314,6 @@ export const Element = (): JSX.Element => {
 
             {!isScreen4 && (
               <Card className="absolute w-[246px] h-[111px] top-[142px] left-[73px] border-0">
-              <Card className="absolute w-[246px] h-[111px] top-[142px] left-1/2 transform -translate-x-1/2 border-0">
                 <CardContent className="relative w-[244px] h-[111px] bg-[url(/union.svg)] bg-[100%_100%] p-0">
                   {!showExcitedMessage ? (
                     <div className="absolute w-[219px] h-[52px] top-[27px] left-[19px] font-global-tokens-headings-h-7 font-[number:var(--global-tokens-headings-h-7-font-weight)] text-[#4b4b4b] text-[length:var(--global-tokens-headings-h-7-font-size)] tracking-[var(--global-tokens-headings-h-7-letter-spacing)] leading-[var(--global-tokens-headings-h-7-line-height)] [font-style:var(--global-tokens-headings-h-7-font-style)]">
@@ -343,7 +336,7 @@ export const Element = (): JSX.Element => {
             {showLanguageButtons && languageOptions.map((language, index) => (
               <div
                 key={language.name}
-                className={`absolute w-full h-[66px] ${index === 0 ? "top-[430px]" : index === 1 ? "top-[497px]" : "top-[564px]"} left-0 px-4 ${index === 2 ? "opacity-80" : ""} ${
+                className={`absolute w-[390px] h-[66px] ${index === 0 ? "top-[430px]" : index === 1 ? "top-[497px]" : "top-[564px]"} left-0 ${index === 2 ? "opacity-80" : ""} ${
                   isExiting ? "animate-fade-out" : "animate-fade-in"
                 } ${
                   isExiting ? `opacity-0` : ""
@@ -353,11 +346,11 @@ export const Element = (): JSX.Element => {
                 }}
               >
                 <Button
-                  className={`flex w-full h-[66px] items-center gap-2 px-0 py-1.5 bg-transparent hover:bg-transparent h-auto transition-all duration-200`}
+                  className={`flex w-[389px] h-[66px] items-center gap-2 px-4 py-1.5 absolute top-0 left-0 bg-transparent hover:bg-transparent h-auto transition-all duration-200`}
                   onClick={() => handleLanguageSelect(language.name)}
                 >
                   <Card
-                    className={`flex items-center gap-3.5 px-3.5 py-2 relative w-full rounded-xl border-2 border-solid transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer ${
+                    className={`flex items-center gap-3.5 px-3.5 py-2 relative flex-1 grow rounded-xl border-2 border-solid transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer ${
                       selectedLanguage === language.name 
                         ? 'bg-[#d2effd] border-[#77d0fa] shadow-[0px_2px_0px_#77d0fa]' 
                         : 'bg-white border-[#ebebeb] shadow-[0px_2px_0px_#ebebeb] hover:bg-[#f8f9fa] hover:border-[#d0d7de]'
@@ -389,7 +382,7 @@ export const Element = (): JSX.Element => {
                       )}
                     </div>
 
-                    <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1">
+                    <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
                       <div
                         className={`relative w-fit mt-[-1.00px] font-global-tokens-headings-h-5 font-[number:var(--global-tokens-headings-h-5-font-weight)] text-[length:var(--global-tokens-headings-h-5-font-size)] tracking-[var(--global-tokens-headings-h-5-letter-spacing)] leading-[var(--global-tokens-headings-h-5-line-height)] whitespace-nowrap [font-style:var(--global-tokens-headings-h-5-font-style)] transition-colors duration-200 ${
                           selectedLanguage === language.name 
@@ -407,7 +400,7 @@ export const Element = (): JSX.Element => {
             ))}
 
             <img
-              className={`absolute w-[calc(100%-18px)] h-[30px] top-[630px] left-[9px] object-cover ${
+              className={`absolute w-[370px] h-[30px] top-[630px] left-[9px] object-cover ${
                 !isExiting ? 'animate-fade-in' : 'animate-fade-out'
               }`}
               style={{
@@ -416,7 +409,9 @@ export const Element = (): JSX.Element => {
               alt="Image"
               src="/image-115.png"
             />
+
           </div>
+
         </div>
       </div>
     </div>

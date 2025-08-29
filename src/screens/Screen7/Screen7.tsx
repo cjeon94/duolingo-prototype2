@@ -126,21 +126,21 @@ function Screen7Modal({
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-[9999] bg-black/70 flex items-center justify-center p-4 safe-area-inset"
+      className="fixed inset-0 z-[9999] bg-black/70 flex items-center justify-center p-4"
     >
-      <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-xl max-w-sm w-full mx-4 relative">
+      <div className="bg-white rounded-2xl p-6 shadow-xl max-w-sm w-full mx-4 relative">
         {/* Duo Character */}
-        <div className="flex justify-center mb-3 sm:mb-4">
+        <div className="flex justify-center mb-4">
           <img
-            className="w-20 sm:w-24 h-20 sm:h-24 object-contain"
+            className="w-24 h-24 object-contain"
             alt="Excited Duo"
             src="/excited-owl.gif"
           />
         </div>
 
         {/* Text Block */}
-        <div className="text-center mb-4 sm:mb-6 max-w-[36ch] mx-auto">
-          <p className="text-[#4b4b4b] text-lg sm:text-xl font-semibold">
+        <div className="text-center mb-6 max-w-[36ch] mx-auto">
+          <p className="text-[#4b4b4b] text-xl font-semibold">
             <span>Wow, your Spanish is so good!</span>
             <br />
             <span>Should we skip to more</span>
@@ -153,14 +153,14 @@ function Screen7Modal({
         <div className="grid grid-cols-2 gap-3">
           <button
             onClick={() => onChoose(false)}
-            className="h-10 sm:h-12 rounded-xl border-2 border-gray-300 bg-white shadow-[0_3px_0_#d1d5db] text-gray-600 font-semibold active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50 text-xs sm:text-sm"
+            className="h-12 rounded-xl border-2 border-gray-300 bg-white shadow-[0_3px_0_#d1d5db] text-gray-600 font-semibold active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50 text-sm"
           >
             NO, KEEP LEARNING
           </button>
 
           <button
             onClick={() => onChoose(true)}
-            className="h-10 sm:h-12 rounded-xl text-white bg-[#2ec748] shadow-[0_3px_0_#27aa3d] font-semibold active:translate-y-[2px] transition-all text-xs sm:text-sm"
+            className="h-12 rounded-xl text-white bg-[#2ec748] shadow-[0_3px_0_#27aa3d] font-semibold active:translate-y-[2px] transition-all text-sm"
           >
             YES, SKIP
             <br />
@@ -453,7 +453,6 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
                   </button>
                 ))}
                 {selectedWords.length === 0 && (
-                  <span className="text-gray-400 text-base">
                   <span className="text-gray-400 text-sm sm:text-base">
                     {showHarderQuiz
                       ? "Tap the Spanish words to build the translation..."
