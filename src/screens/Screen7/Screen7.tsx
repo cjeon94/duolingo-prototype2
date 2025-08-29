@@ -1,5 +1,4 @@
 import React from "react";
-import { Screen8 } from "../Screen8/Screen8";
 
 interface Exercise {
   english: string;
@@ -71,7 +70,6 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
   const [isChecked, setIsChecked] = React.useState(false);
   const [result, setResult] = React.useState<'correct' | 'incorrect' | null>(null);
   const [exerciseCount, setExerciseCount] = React.useState(0);
-  const [showScreen8, setShowScreen8] = React.useState(false);
 
   // Initialize available words when exercise changes
   React.useEffect(() => {
@@ -102,7 +100,8 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
 
   const handleModalResponse = (skipToAdvanced: boolean) => {
     if (skipToAdvanced) {
-      setShowScreen8(true);
+      setShowHarderQuiz(true);
+      setShowModal(false);
     } else {
       setShowModal(false);
     }
@@ -168,10 +167,6 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
   const baseProgress = showHarderQuiz ? 60 : 25;
   const progressPercentage = Math.min(baseProgress + (exerciseCount * 10), 100);
   const levelNumber = showHarderQuiz ? 8 + exerciseCount : 2 + exerciseCount;
-
-  if (showScreen8) {
-    return <Screen8 />;
-  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -405,9 +400,6 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
                   YES, SKIP<br/>AHEAD
                 </button>
               </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
