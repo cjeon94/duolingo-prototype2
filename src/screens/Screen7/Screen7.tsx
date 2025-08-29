@@ -405,6 +405,9 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
         )}
       </div>
     </div>
+        )}
+      </div>
+    </div>
   );
 }
 
