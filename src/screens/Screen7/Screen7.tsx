@@ -100,8 +100,7 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
 
   const handleModalResponse = (skipToAdvanced: boolean) => {
     if (skipToAdvanced) {
-      setShowHarderQuiz(true);
-      setShowModal(false);
+      onResponse(true);
     } else {
       setShowModal(false);
     }
@@ -400,6 +399,9 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
                   YES, SKIP<br/>AHEAD
                 </button>
               </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
