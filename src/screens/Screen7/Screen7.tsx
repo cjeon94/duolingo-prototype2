@@ -22,21 +22,6 @@ const exercises: Exercise[] = [
     english: "She reads a book",
     spanish: "Ella lee un libro",
     list: ["Ella", "lee", "un", "libro", "papel", "ventana", "puerta"]
-  },
-  {
-    english: "The cat sleeps",
-    spanish: "El gato duerme",
-    list: ["El", "gato", "duerme", "perro", "casa", "come", "agua"]
-  },
-  {
-    english: "We study Spanish",
-    spanish: "Nosotros estudiamos español",
-    list: ["Nosotros", "estudiamos", "español", "inglés", "francés", "alemán", "italiano"]
-  },
-  {
-    english: "The girl runs fast",
-    spanish: "La niña corre rápido",
-    list: ["La", "niña", "corre", "rápido", "lento", "camina", "salta"]
   }
 ];
 
@@ -357,10 +342,10 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
             </div>
           </div>
         )}
-      </div>
 
-      {/* Screen8 Overlay */}
-      {showScreen8 && <Screen8 />}
+        {/* Screen8 Overlay */}
+        {showScreen8 && <Screen8 />}
+      </div>
     </div>
   );
 }
