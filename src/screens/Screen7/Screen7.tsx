@@ -400,6 +400,9 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
                   YES, SKIP<br/>AHEAD
                 </button>
               </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
