@@ -1,5 +1,6 @@
 import React from "react";
 import { Screen7 } from "../Screen7/Screen7";
+import { Screen8 } from "../Screen8/Screen8";
 
 interface Exercise {
   english: string;
@@ -49,6 +50,7 @@ export default function Screen6(): JSX.Element {
   const [isChecked, setIsChecked] = React.useState(false);
   const [result, setResult] = React.useState<'correct' | 'incorrect' | null>(null);
   const [showScreen7, setShowScreen7] = React.useState(false);
+  const [showScreen8, setShowScreen8] = React.useState(false);
 
   // Auto-play audio when component mounts
   React.useEffect(() => {
@@ -112,11 +114,16 @@ export default function Screen6(): JSX.Element {
 
   const handleScreen7Response = (skipToAdvanced: boolean) => {
     setShowScreen7(false);
-    // Here you could handle the skip to advanced logic or continue with more exercises
-    console.log("Skip to advanced:", skipToAdvanced);
+    if (skipToAdvanced) {
+      setShowScreen8(true);
+    }
   };
 
   const englishTokens = exercise.english.split(' ');
+
+  if (showScreen8) {
+    return <Screen8 />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">

@@ -100,8 +100,7 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
 
   const handleModalResponse = (skipToAdvanced: boolean) => {
     if (skipToAdvanced) {
-      setShowHarderQuiz(true);
-      setShowModal(false);
+      onResponse(true);
     } else {
       setShowModal(false);
     }
