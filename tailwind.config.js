@@ -1,56 +1,89 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./src/**/*.{html,js,ts,jsx,tsx}",
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Nunito', 'system-ui', 'sans-serif'],
+        "global-tokens-body-b-5": "var(--global-tokens-body-b-5-font-family)",
+        "global-tokens-body-b-7": "var(--global-tokens-body-b-7-font-family)",
+        "global-tokens-headings-h-4":
+          "var(--global-tokens-headings-h-4-font-family)",
+        "global-tokens-headings-h-5":
+          "var(--global-tokens-headings-h-5-font-family)",
+        "global-tokens-headings-h-7":
+          "var(--global-tokens-headings-h-7-font-family)",
+        "rules-label-s": "var(--rules-label-s-font-family)",
+        "rules-paragraph-s": "var(--rules-paragraph-s-font-family)",
+        sans: [
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+          '"Noto Color Emoji"',
+        ],
+      },
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
-        'fade-in': {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' }
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
-        'fade-out': {
-          '0%': { opacity: '1', transform: 'translateY(0)' },
-          '100%': { opacity: '0', transform: 'translateY(-20px)' }
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
-        'sway': {
-          '0%, 100%': { transform: 'translateX(0px) rotate(0deg)' },
-          '50%': { transform: 'translateX(3px) rotate(2deg)' }
-        },
-        'confetti-fall': {
-          '0%': { transform: 'translateY(-100vh) rotate(0deg)', opacity: '1' },
-          '100%': { transform: 'translateY(100vh) rotate(720deg)', opacity: '0' }
-        },
-        'pulse-glow': {
-          '0%, 100%': { 
-            boxShadow: '0 0 30px rgba(88, 204, 2, 0.7), 0 0 60px rgba(88, 204, 2, 0.4), 0 0 90px rgba(88, 204, 2, 0.2)',
-            transform: 'scale(1)'
-          },
-          '50%': { 
-            boxShadow: '0 0 50px rgba(88, 204, 2, 0.9), 0 0 100px rgba(88, 204, 2, 0.6), 0 0 150px rgba(88, 204, 2, 0.3)',
-            transform: 'scale(1.08)'
-          }
-        },
-        'typewriter': {
-          '0%': { width: '0' },
-          '100%': { width: '100%' }
-        }
       },
       animation: {
-        'fade-in': 'fade-in 0.8s ease forwards',
-        'fade-out': 'fade-out 0.8s ease forwards',
-        'sway': 'sway 3s ease-in-out infinite',
-        'confetti-fall': 'confetti-fall 1.5s ease-out infinite',
-        'pulse-glow': 'pulse-glow 1.5s ease-in-out infinite',
-        'typewriter': 'typewriter 0.8s steps(20, end) forwards'
-      }
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
     },
+    container: { center: true, padding: "2rem", screens: { "2xl": "1400px" } },
   },
   plugins: [],
-}
+  darkMode: ["class"],
+};
