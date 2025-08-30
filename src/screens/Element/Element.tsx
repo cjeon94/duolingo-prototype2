@@ -286,17 +286,24 @@ export const Element = (): JSX.Element => {
 
             {/* Screen 4 Message Bubble */}
             {isScreen4 && (
-              <Card className="absolute w-[246px] h-[111px] top-[360px] left-1/2 transform -translate-x-1/2 border-0">
-                <CardContent className="relative w-[244px] h-[111px] bg-[url(/union.svg)] bg-[100%_100%] p-0">
-                  <div className="absolute w-[219px] h-[78px] top-[16px] left-[19px] font-global-tokens-headings-h-7 font-[number:var(--global-tokens-headings-h-7-font-weight)] text-[#4b4b4b] text-[length:var(--global-tokens-headings-h-7-font-size)] tracking-[var(--global-tokens-headings-h-7-letter-spacing)] leading-[var(--global-tokens-headings-h-7-line-height)] [font-style:var(--global-tokens-headings-h-7-font-style)]">
-                    <div>
-                      <div className="typewriter-screen4-line1">OK, now...</div>
-                      <div className="typewriter-screen4-line2">Let's start and find your</div>
-                      <div className="typewriter-screen4-line3">level!</div>
+              <>
+                <img
+                  className="absolute w-48 h-[179px] top-[248px] left-1/2 transform -translate-x-1/2 object-cover animate-sway hover:animate-pulse transition-transform duration-300 hover:scale-105"
+                  alt="Duo owl"
+                  src="https://i.imgur.com/4du7aGv.png"
+                />
+                <Card className="absolute w-[246px] h-[111px] top-[360px] left-1/2 transform -translate-x-1/2 border-0">
+                  <CardContent className="relative w-[244px] h-[111px] bg-[url(/union.svg)] bg-[100%_100%] p-0">
+                    <div className="absolute w-[219px] h-[78px] top-[16px] left-[19px] font-global-tokens-headings-h-7 font-[number:var(--global-tokens-headings-h-7-font-weight)] text-[#4b4b4b] text-[length:var(--global-tokens-headings-h-7-font-size)] tracking-[var(--global-tokens-headings-h-7-letter-spacing)] leading-[var(--global-tokens-headings-h-7-line-height)] [font-style:var(--global-tokens-headings-h-7-font-style)]">
+                      <div>
+                        <div className="typewriter-screen4-line1">OK, now...</div>
+                        <div className="typewriter-screen4-line2">Let's start and find your</div>
+                        <div className="typewriter-screen4-line3">level!</div>
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </>
             )}
 
             {!isScreen4 && (
