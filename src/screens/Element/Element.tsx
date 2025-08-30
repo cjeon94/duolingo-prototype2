@@ -401,7 +401,7 @@ export const Element = (): JSX.Element => {
                 animationDelay: !isExiting ? '450ms' : '300ms'
               }}
               alt="Image"
-              src="/image-115.png"
+              src="/bottom-button.svg"
             />
           </div>
         </div>
