@@ -293,7 +293,7 @@ export const Element = (): JSX.Element => {
                   animation: 'moveOwlFromLeft 1s ease-out forwards'
                 }}
                 alt="Cheer owl"
-                src="https://i.imgur.com/4du7aGv.png"
+                src="/duolingo-cheer-gif-copy.gif"
               />
             )}
 
