@@ -92,40 +92,48 @@ export default function Screen2(): JSX.Element {
   }
 
   return (
-    <div className="min-h-screen grid place-items-center bg-slate-50 p-4">
-      {/* phone canvas */}
-      <div className="relative w-[390px] h-[844px] bg-white rounded-xl border border-slate-200 overflow-hidden">
-        {/* status bar */}
-        <div className="absolute top-0 left-0 right-0 h-[54px]">
-          <div className="absolute left-[52px] top-[17px] text-[17px] text-[#454a53]">9:41</div>
-          <div className="absolute right-4 top-[17px] h-5 w-20 rounded bg-slate-200" />
-        </div>
-
-        {/* progress */}
-        <div className="absolute top-[70px] left-4 right-4">
-          <div className="h-2 w-full rounded-full bg-[#e5e5e5] overflow-hidden">
-            <div className="h-2 w-[18%] bg-[#58cc02]" />
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      {/* Main Canvas */}
+      <div className="relative w-[390px] h-[844px] bg-white rounded-xl shadow-lg overflow-hidden">
+        
+        {/* Status Bar */}
+        <div className="flex justify-between items-center px-4 py-3 h-[54px]">
+          <div className="text-[17px] font-semibold text-[#454a53]">9:41</div>
+          <div className="flex items-center gap-1">
+            <div className="w-4 h-3 bg-[#454a53] rounded-sm"></div>
+            <div className="w-6 h-3 border border-[#454a53] rounded-sm"></div>
           </div>
         </div>
 
-        {/* level */}
-        <div className="absolute top-[110px] left-6 flex items-center gap-2">
-          <div className="w-6 h-6 rounded-full bg-[color:var(--purple,#ce82ff)] grid place-items-center text-white text-xs font-bold">
-            1
+        {/* Progress Bar */}
+        <div className="flex items-center gap-4 px-4 mb-6">
+          <button className="w-8 h-8 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 20 20" className="text-[#6b7280]">
+              <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
+          <div className="flex-1 h-3 bg-[#e5e7eb] rounded-full overflow-hidden">
+            <div className="w-[18%] h-full bg-[#58cc02] rounded-full"></div>
           </div>
-          <span className="text-[color:var(--purple,#ce82ff)] font-bold text-sm tracking-wider">
-            LEVEL 1
-          </span>
         </div>
 
-        {/* prompt */}
-        <div className="absolute left-6 right-6 top-[150px]">
-          <h1 className="text-2xl font-bold text-[color:var(--grayText,#4b4b4b)] mb-6">
+        {/* Level Indicator */}
+        <div className="flex items-center gap-3 px-6 mb-8">
+          <div className="w-8 h-8 bg-[#ce82ff] rounded-full flex items-center justify-center">
+            <span className="text-white font-bold text-sm">1</span>
+          </div>
+          <span className="text-[#ce82ff] font-bold text-sm tracking-wider">LEVEL 1</span>
+        </div>
+
+        {/* Main Content */}
+        <div className="px-6 pb-32">
+          {/* Title */}
+          <h1 className="text-2xl font-bold text-[#4b4b4b] mb-8">
             Select the correct image
           </h1>
 
-          {/* audio row */}
-          <div className="flex items-center gap-3 mb-6">
+          {/* Audio Row */}
+          <div className="flex items-center gap-3 mb-8">
             <button
               className="w-12 h-12 rounded-xl border-0 p-0 shadow-md bg-[#1cb0f6] flex items-center justify-center"
               onClick={() => {
@@ -150,8 +158,8 @@ export default function Screen2(): JSX.Element {
             </span>
           </div>
 
-          {/* options */}
-          <div className="grid grid-cols-2 gap-4">
+          {/* Options Grid */}
+          <div className="grid grid-cols-2 gap-4 mb-8">
             {options.map(({ key, label, Icon }) => {
               const active = selected === key;
               const correct = checked && key === correctKey;
@@ -166,19 +174,15 @@ export default function Screen2(): JSX.Element {
                     setChecked(false);
                   }}
                   className={[
-                    "rounded-2xl p-4 text-left bg-white shadow-sm border transition",
-                    active ? "ring-2 ring-sky-400 border-sky-300" : "border-[#e6e6e6]",
-                    correct ? "ring-2 ring-emerald-500" : "",
-                    wrong ? "ring-2 ring-rose-500" : "",
+                    "rounded-2xl p-4 text-left bg-white shadow-sm border-2 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]",
+                    active ? "border-[#1cb0f6] bg-[#e6f7ff]" : "border-[#e6e6e6]",
+                    correct ? "border-[#58cc02] bg-[#e6ffe6]" : "",
+                    wrong ? "border-[#ff4b4b] bg-[#ffe6e6]" : "",
                   ].join(" ")}
                 >
                   <div className="grid gap-2 place-items-center">
                     <Icon />
-                    <div
-                      className={
-                        key === "one" ? "text-sm font-medium text-[#1cb0f6]" : "text-sm text-slate-600"
-                      }
-                    >
+                    <div className="text-sm font-medium text-[#4b4b4b]">
                       {label}
                     </div>
                   </div>
@@ -187,32 +191,38 @@ export default function Screen2(): JSX.Element {
             })}
           </div>
 
-          {/* feedback */}
+          {/* Feedback */}
           {isCorrect && (
-            <div className="mt-4 p-3 bg-green-100 border border-green-300 rounded-lg">
+            <div className="mb-4 p-3 bg-green-100 border border-green-300 rounded-lg">
               <span className="text-green-700 font-semibold">¡Correcto! Great job!</span>
             </div>
           )}
           {isWrong && (
-            <div className="mt-4 p-3 bg-red-100 border border-red-300 rounded-lg">
+            <div className="mb-4 p-3 bg-red-100 border border-red-300 rounded-lg">
               <span className="text-red-700 font-semibold">Not quite right. Try again!</span>
             </div>
           )}
         </div>
 
-        {/* bottom actions */}
+        {/* Footer Bar */}
         <div className="absolute left-4 right-4 bottom-[48px]">
           <button
-            className="w-full h-12 rounded-xl text-white font-semibold tracking-wide disabled:opacity-60 bg-[#58cc02]"
+            className="w-full h-12 rounded-xl text-white font-semibold tracking-wide disabled:opacity-60 transition-all active:translate-y-[2px]"
             disabled={!selected}
             onClick={handleCheck}
+            style={{
+              backgroundColor: selected ? '#58cc02' : '#86efac',
+              boxShadow: selected ? '0 3px 0 #4a9e02' : '0 3px 0 #6ee7b7'
+            }}
           >
             CHECK
           </button>
         </div>
 
-        {/* home indicator */}
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-2 w-[139px] h-[5px] rounded-full bg-black/90" />
+        {/* Home Indicator */}
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
+          <div className="w-[134px] h-[5px] bg-black rounded-full"></div>
+        </div>
       </div>
     </div>
   );

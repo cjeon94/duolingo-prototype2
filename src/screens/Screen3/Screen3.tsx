@@ -118,6 +118,10 @@ export default function Screen3(): JSX.Element {
 
   const englishTokens = exercise.english.split(' ');
 
+  if (showScreen4) {
+    return <Screen4 onResponse={handleScreen4Response} />;
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       {/* Main Canvas */}
@@ -156,7 +160,7 @@ export default function Screen3(): JSX.Element {
         <div className="px-6 pb-32">
           {/* Title */}
           <h1 className="text-2xl font-bold text-[#4b4b4b] mb-8">
-            Select the correct image
+            Write this in Spanish
           </h1>
 
           {/* Top Row - Duo and English Sentence */}
@@ -282,11 +286,6 @@ export default function Screen3(): JSX.Element {
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
           <div className="w-[134px] h-[5px] bg-black rounded-full"></div>
         </div>
-
-        {/* Screen4 Overlay */}
-        {showScreen4 && (
-          <Screen4 onResponse={handleScreen4Response} />
-        )}
       </div>
     </div>
   );
