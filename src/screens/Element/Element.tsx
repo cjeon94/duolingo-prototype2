@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
-import { Screen5 } from "../Screen5/Screen5";
+import { Screen2 } from "../Screen2/Screen2";
 
 const Confetti = () => {
   const confettiPieces = Array.from({ length: 50 }, (_, i) => ({
@@ -85,7 +85,7 @@ export const Element = (): JSX.Element => {
   const [showLanguageButtons, setShowLanguageButtons] = React.useState(true);
   const [showExcitedMessage, setShowExcitedMessage] = React.useState(false);
   const [isScreen4, setIsScreen4] = React.useState(false);
-  const [isScreen5, setIsScreen5] = React.useState(false);
+  const [isScreen2, setIsScreen2] = React.useState(false);
 
   const handleLanguageSelect = (languageName: string) => {
     setSelectedLanguage(languageName);
@@ -102,11 +102,11 @@ export const Element = (): JSX.Element => {
   };
 
   const handleStartClick = () => {
-    setIsScreen5(true);
+    setIsScreen2(true);
   };
 
-  if (isScreen5) {
-    return <Screen5 />;
+  if (isScreen2) {
+    return <Screen2 />;
   }
 
   return (

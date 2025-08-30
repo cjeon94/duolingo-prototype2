@@ -1,5 +1,5 @@
 import React from "react";
-import { Screen7 } from "../Screen7/Screen7";
+import { Screen4 } from "../Screen4/Screen4";
 
 interface Exercise {
   english: string;
@@ -25,7 +25,7 @@ const exercises: Exercise[] = [
   }
 ];
 
-export default function Screen6(): JSX.Element {
+export default function Screen3(): JSX.Element {
   const duoCharacters = [
     "/duo-character-1.svg",
     "/duo-character-2.svg", 
@@ -48,7 +48,7 @@ export default function Screen6(): JSX.Element {
   );
   const [isChecked, setIsChecked] = React.useState(false);
   const [result, setResult] = React.useState<'correct' | 'incorrect' | null>(null);
-  const [showScreen7, setShowScreen7] = React.useState(false);
+  const [showScreen4, setShowScreen4] = React.useState(false);
 
   // Auto-play audio when component mounts
   React.useEffect(() => {
@@ -89,9 +89,9 @@ export default function Screen6(): JSX.Element {
         console.log("Could not play correct answer sound");
       });
       
-      // Show Screen7 after 1.5 seconds
+      // Show Screen4 after 1.5 seconds
       setTimeout(() => {
-        setShowScreen7(true);
+        setShowScreen4(true);
       }, 1500);
     } else {
       // Play incorrect answer sound
@@ -110,8 +110,8 @@ export default function Screen6(): JSX.Element {
     setResult(null);
   };
 
-  const handleScreen7Response = (skipToAdvanced: boolean) => {
-    setShowScreen7(false);
+  const handleScreen4Response = (skipToAdvanced: boolean) => {
+    setShowScreen4(false);
     // Here you could handle the skip to advanced logic or continue with more exercises
     console.log("Skip to advanced:", skipToAdvanced);
   };
@@ -156,7 +156,7 @@ export default function Screen6(): JSX.Element {
         <div className="px-6 pb-32">
           {/* Title */}
           <h1 className="text-2xl font-bold text-[#4b4b4b] mb-8">
-            Write this in Spanish
+            Select the correct image
           </h1>
 
           {/* Top Row - Duo and English Sentence */}
@@ -253,7 +253,7 @@ export default function Screen6(): JSX.Element {
         </div>
 
         {/* Footer Bar */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
+        <div className="absolute left-4 right-4 bottom-[48px]">
           <div className="flex gap-4">
             {/* Skip Button */}
             <button
@@ -283,13 +283,13 @@ export default function Screen6(): JSX.Element {
           <div className="w-[134px] h-[5px] bg-black rounded-full"></div>
         </div>
 
-        {/* Screen7 Overlay */}
-        {showScreen7 && (
-          <Screen7 onResponse={handleScreen7Response} />
+        {/* Screen4 Overlay */}
+        {showScreen4 && (
+          <Screen4 onResponse={handleScreen4Response} />
         )}
       </div>
     </div>
   );
 }
 
-export { Screen6 };
+export { Screen3 };

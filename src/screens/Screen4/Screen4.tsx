@@ -109,12 +109,12 @@ const harderExercises: HarderExercise[] = [
   },
 ];
 
-interface Screen7Props {
+interface Screen4Props {
   onResponse: (skipToAdvanced: boolean) => void;
 }
 
 /** Portal modal that renders at document.body, independent of parent stacking context */
-function Screen7Modal({
+function Screen4Modal({
   open,
   onChoose,
 }: {
@@ -173,7 +173,7 @@ function Screen7Modal({
   );
 }
 
-export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
+export default function Screen4({ onResponse }: Screen4Props): JSX.Element {
   const [showModal, setShowModal] = React.useState(true);
   const [showHarderQuiz, setShowHarderQuiz] = React.useState(false);
   const [currentExercise, setCurrentExercise] = React.useState<Exercise>(() =>
@@ -560,16 +560,9 @@ export default function Screen7({ onResponse }: Screen7Props): JSX.Element {
       </div>
 
       {/* Portal Modal */}
-      <Screen7Modal open={showModal} onChoose={handleModalResponse} />
+      <Screen4Modal open={showModal} onChoose={handleModalResponse} />
     </div>
   );
 }
 
-export { Screen7 };
-
-
-
-
-
-
-
+export { Screen4 };
