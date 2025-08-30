@@ -1,6 +1,6 @@
-// src/screens/Screen2.tsx
+// src/screens/Screen5.tsx
 import React from "react";
-import { Screen3 } from "../Screen3/Screen3";
+import { Screen6 } from "../Screen6/Screen6";
 import OneImg from "../../assets/vocab/one.png";
 import TheManImg from "../../assets/vocab/the-man.png";
 import TheCatImg from "../../assets/vocab/the-cat.png";
@@ -32,10 +32,10 @@ const IconBoy = () => (
   <img src={TheBoyImg} alt="the boy" className="w-16 h-16 object-contain" />
 );
 
-export default function Screen2(): JSX.Element {
+export default function Screen5(): JSX.Element {
   const [selected, setSelected] = React.useState<OptionKey | null>(null);
   const [checked, setChecked] = React.useState(false);
-  const [showScreen3, setShowScreen3] = React.useState(false);
+  const [showScreen6, setShowScreen6] = React.useState(false);
 
   // Auto-play audio when component mounts
   React.useEffect(() => {
@@ -74,9 +74,9 @@ export default function Screen2(): JSX.Element {
         console.log("Could not play correct answer sound");
       });
       
-      // Wait 1.5 seconds then transition to Screen3
+      // Wait 1.5 seconds then transition to Screen6
       setTimeout(() => {
-        setShowScreen3(true);
+        setShowScreen6(true);
       }, 1500);
     } else {
       // Play incorrect answer sound
@@ -87,8 +87,8 @@ export default function Screen2(): JSX.Element {
     }
   };
 
-  if (showScreen3) {
-    return <Screen3 />;
+  if (showScreen6) {
+    return <Screen6 />;
   }
 
   return (
@@ -218,4 +218,4 @@ export default function Screen2(): JSX.Element {
   );
 }
 
-export { Screen2 };
+export { Screen5 };
