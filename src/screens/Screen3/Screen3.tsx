@@ -118,17 +118,13 @@ export default function Screen3(): JSX.Element {
 
   const englishTokens = exercise.english.split(' ');
 
-  if (showScreen4) {
-    return <Screen4 onResponse={handleScreen4Response} />;
-  }
-
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       {/* Main Canvas */}
-      <div className="relative w-full h-screen bg-white overflow-hidden">
+      <div className="relative w-[390px] h-[844px] bg-white rounded-xl shadow-lg overflow-hidden">
         
         {/* Status Bar */}
-        <div className="flex justify-between items-center px-6 py-4 h-[60px]">
+        <div className="flex justify-between items-center px-4 py-3 h-[54px]">
           <div className="text-[17px] font-semibold text-[#454a53]">9:41</div>
           <div className="flex items-center gap-1">
             <div className="w-4 h-3 bg-[#454a53] rounded-sm"></div>
@@ -137,7 +133,7 @@ export default function Screen3(): JSX.Element {
         </div>
 
         {/* Progress Bar */}
-        <div className="flex items-center gap-4 px-6 mb-8">
+        <div className="flex items-center gap-4 px-4 mb-6">
           <button className="w-8 h-8 flex items-center justify-center">
             <svg width="20" height="20" viewBox="0 0 20 20" className="text-[#6b7280]">
               <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -149,7 +145,7 @@ export default function Screen3(): JSX.Element {
         </div>
 
         {/* Level Indicator */}
-        <div className="flex items-center gap-3 px-6 mb-10">
+        <div className="flex items-center gap-3 px-6 mb-8">
           <div className="w-8 h-8 bg-[#ce82ff] rounded-full flex items-center justify-center">
             <span className="text-white font-bold text-sm">2</span>
           </div>
@@ -157,27 +153,27 @@ export default function Screen3(): JSX.Element {
         </div>
 
         {/* Main Content */}
-        <div className="px-6 pb-40">
+        <div className="px-6 pb-32">
           {/* Title */}
-          <h1 className="text-3xl font-bold text-[#4b4b4b] mb-12 text-center">
-            Write this in Spanish
+          <h1 className="text-2xl font-bold text-[#4b4b4b] mb-8">
+            Select the correct image
           </h1>
 
           {/* Top Row - Duo and English Sentence */}
-          <div className="flex flex-col items-center gap-6 mb-12">
+          <div className="flex items-center gap-4 mb-8">
             {/* Duo Character */}
-            <div className="w-32 h-32 flex items-center justify-center flex-shrink-0">
+            <div className="w-28 h-28 flex items-center justify-center flex-shrink-0">
               <img 
                 src={randomDuoCharacter} 
                 alt="Duo character" 
-                className="w-32 h-32 object-contain"
+                className="w-28 h-28 object-contain"
               />
             </div>
             
             {/* Audio Button and English Sentence */}
-            <div className="flex flex-col items-center gap-4 w-full">
+            <div className="flex items-center gap-3 flex-1">
               <button
-                className="w-16 h-16 rounded-xl border-0 p-0 shadow-lg bg-[#1cb0f6] flex items-center justify-center"
+                className="w-12 h-12 rounded-xl border-0 p-0 shadow-md bg-[#1cb0f6] flex items-center justify-center flex-shrink-0"
                 onClick={() => {
                   const utterance = new SpeechSynthesisUtterance(exercise.english);
                   utterance.lang = 'en-US';
@@ -185,18 +181,18 @@ export default function Screen3(): JSX.Element {
                   speechSynthesis.speak(utterance);
                 }}
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M19.07 4.93A10 10 0 0 1 19.07 19.07M15.54 8.46A5 5 0 0 1 15.54 15.54" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
               
               {/* English Sentence as Tokens */}
-              <div className="flex flex-wrap justify-center gap-2">
+              <div className="flex flex-wrap gap-1">
                 {englishTokens.map((token, index) => (
                   <span
                     key={index}
-                    className="inline-block border-b-2 border-dashed border-[#bdbdbd] text-lg text-[#4b4b4b]"
+                    className="inline-block border-b-2 border-dashed border-[#bdbdbd] mr-1 text-base text-[#4b4b4b]"
                   >
                     {token}
                   </span>
@@ -206,33 +202,33 @@ export default function Screen3(): JSX.Element {
           </div>
 
           {/* Destination Row */}
-          <div className="mb-10">
-            <div className="min-h-[80px] border-2 border-dashed border-[#e4e4e4] rounded-2xl p-6 bg-gray-50">
-              <div className="flex flex-wrap justify-center gap-3">
+          <div className="mb-8">
+            <div className="min-h-[60px] border-2 border-dashed border-[#e4e4e4] rounded-lg p-4 bg-gray-50">
+              <div className="flex flex-wrap gap-2">
                 {selectedWords.map((word, index) => (
                   <button
                     key={`selected-${word}-${index}`}
                     onClick={() => handleWordClick(word, true)}
-                    className="rounded-2xl border border-[#e4e4e4] bg-white shadow-[0_4px_0_#e4e4e4] px-5 py-3 text-lg active:translate-y-[2px] active:shadow-none transition-all"
+                    className="rounded-[15px] border border-[#e4e4e4] bg-white shadow-[0_3px_0_#e4e4e4] px-4 py-2 text-base active:translate-y-[2px] active:shadow-none transition-all"
                   >
                     {word}
                   </button>
                 ))}
                 {selectedWords.length === 0 && (
-                  <span className="text-gray-400 text-lg">Tap the Spanish words...</span>
+                  <span className="text-gray-400 text-base">Tap the Spanish words...</span>
                 )}
               </div>
             </div>
           </div>
 
           {/* Origin Row - Spanish Words */}
-          <div className="mb-12">
-            <div className="flex flex-wrap justify-center gap-3">
+          <div className="mb-8">
+            <div className="flex flex-wrap gap-2">
               {availableWords.map((word, index) => (
                 <button
                   key={`available-${word}-${index}`}
                   onClick={() => handleWordClick(word, false)}
-                  className="rounded-2xl border border-[#e4e4e4] bg-white shadow-[0_4px_0_#e4e4e4] px-5 py-3 text-lg active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50"
+                  className="rounded-[15px] border border-[#e4e4e4] bg-white shadow-[0_3px_0_#e4e4e4] px-4 py-2 text-base active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50"
                 >
                   {word}
                 </button>
@@ -242,14 +238,14 @@ export default function Screen3(): JSX.Element {
 
           {/* Feedback */}
           {result === 'correct' && (
-            <div className="mb-6 p-4 bg-green-100 border border-green-300 rounded-xl text-center">
-              <span className="text-green-700 font-semibold text-lg">¡Correcto! Great job!</span>
+            <div className="mb-4 p-3 bg-green-100 border border-green-300 rounded-lg">
+              <span className="text-green-700 font-semibold">¡Correcto! Great job!</span>
             </div>
           )}
           {result === 'incorrect' && (
-            <div className="mb-6 p-4 bg-red-100 border border-red-300 rounded-xl text-center">
-              <span className="text-red-700 font-semibold text-lg">Not quite right. Try again!</span>
-              <div className="text-base text-red-600 mt-2">
+            <div className="mb-4 p-3 bg-red-100 border border-red-300 rounded-lg">
+              <span className="text-red-700 font-semibold">Not quite right. Try again!</span>
+              <div className="text-sm text-red-600 mt-1">
                 Correct answer: {exercise.spanish}
               </div>
             </div>
@@ -257,12 +253,12 @@ export default function Screen3(): JSX.Element {
         </div>
 
         {/* Footer Bar */}
-        <div className="absolute left-6 right-6 bottom-[60px]">
+        <div className="absolute left-4 right-4 bottom-[48px]">
           <div className="flex gap-4">
             {/* Skip Button */}
             <button
               onClick={handleSkip}
-              className="flex-1 h-14 rounded-2xl border-2 border-gray-300 bg-white shadow-[0_4px_0_#d1d5db] text-gray-600 font-bold text-lg active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50"
+              className="flex-1 h-12 rounded-xl border-2 border-gray-300 bg-white shadow-[0_3px_0_#d1d5db] text-gray-600 font-semibold active:translate-y-[2px] active:shadow-none transition-all hover:bg-gray-50"
             >
               SKIP
             </button>
@@ -271,10 +267,10 @@ export default function Screen3(): JSX.Element {
             <button
               onClick={handleCheck}
               disabled={selectedWords.length === 0}
-              className="flex-1 h-14 rounded-2xl text-white font-bold text-lg active:translate-y-[2px] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 h-12 rounded-xl text-white font-semibold active:translate-y-[2px] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 backgroundColor: selectedWords.length > 0 ? '#2ec748' : '#86efac',
-                boxShadow: selectedWords.length > 0 ? '0 4px 0 #27aa3d' : '0 4px 0 #6ee7b7'
+                boxShadow: selectedWords.length > 0 ? '0 3px 0 #27aa3d' : '0 3px 0 #6ee7b7'
               }}
             >
               CHECK
@@ -283,9 +279,14 @@ export default function Screen3(): JSX.Element {
         </div>
 
         {/* Home Indicator */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-          <div className="w-[140px] h-[6px] bg-black rounded-full"></div>
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
+          <div className="w-[134px] h-[5px] bg-black rounded-full"></div>
         </div>
+
+        {/* Screen4 Overlay */}
+        {showScreen4 && (
+          <Screen4 onResponse={handleScreen4Response} />
+        )}
       </div>
     </div>
   );
