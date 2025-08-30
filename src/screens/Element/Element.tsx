@@ -284,19 +284,6 @@ export const Element = (): JSX.Element => {
               />
             )}
 
-            {/* Screen 4: Owl moving down below start button */}
-            {isScreen4 && (
-              <img
-                className="absolute w-48 h-[179px] top-[450px] left-1/2 transform -translate-x-1/2 object-cover animate-bounce-gentle transition-all duration-1000 ease-out"
-                style={{
-                  transform: 'translateX(-50%) translateX(-300px)',
-                  animation: 'moveOwlFromLeft 1s ease-out forwards'
-                }}
-                alt="Cheer owl"
-                src="/duolingo-cheer-gif-copy.gif"
-              />
-            )}
-
             {/* Screen 4 Message Bubble */}
             {isScreen4 && (
               <Card className="absolute w-[246px] h-[111px] top-[360px] left-1/2 transform -translate-x-1/2 border-0">
