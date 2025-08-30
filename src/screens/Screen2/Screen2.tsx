@@ -92,12 +92,12 @@ export default function Screen2(): JSX.Element {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-white">
       {/* Main Canvas */}
-      <div className="relative w-[390px] h-[844px] bg-white rounded-xl shadow-lg overflow-hidden">
+      <div className="relative w-full h-screen bg-white overflow-hidden">
         
         {/* Status Bar */}
-        <div className="flex justify-between items-center px-4 py-3 h-[54px]">
+        <div className="flex justify-between items-center px-6 py-4 h-[60px]">
           <div className="text-[17px] font-semibold text-[#454a53]">9:41</div>
           <div className="flex items-center gap-1">
             <div className="w-4 h-3 bg-[#454a53] rounded-sm"></div>
@@ -106,7 +106,7 @@ export default function Screen2(): JSX.Element {
         </div>
 
         {/* Progress Bar */}
-        <div className="flex items-center gap-4 px-4 mb-6">
+        <div className="flex items-center gap-4 px-6 mb-8">
           <button className="w-8 h-8 flex items-center justify-center">
             <svg width="20" height="20" viewBox="0 0 20 20" className="text-[#6b7280]">
               <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -118,7 +118,7 @@ export default function Screen2(): JSX.Element {
         </div>
 
         {/* Level Indicator */}
-        <div className="flex items-center gap-3 px-6 mb-8">
+        <div className="flex items-center gap-3 px-6 mb-10">
           <div className="w-8 h-8 bg-[#ce82ff] rounded-full flex items-center justify-center">
             <span className="text-white font-bold text-sm">1</span>
           </div>
@@ -126,16 +126,16 @@ export default function Screen2(): JSX.Element {
         </div>
 
         {/* Main Content */}
-        <div className="px-6 pb-32">
+        <div className="px-6 pb-40">
           {/* Title */}
-          <h1 className="text-2xl font-bold text-[#4b4b4b] mb-8">
+          <h1 className="text-3xl font-bold text-[#4b4b4b] mb-12 text-center">
             Select the correct image
           </h1>
 
           {/* Audio Row */}
-          <div className="flex items-center gap-3 mb-8">
+          <div className="flex items-center justify-center gap-4 mb-12">
             <button
-              className="w-12 h-12 rounded-xl border-0 p-0 shadow-md bg-[#1cb0f6] flex items-center justify-center"
+              className="w-16 h-16 rounded-xl border-0 p-0 shadow-lg bg-[#1cb0f6] flex items-center justify-center"
               onClick={() => {
                 // Try to play audio file first, fallback to text-to-speech
                 const audio = new Audio("/uno.mp3");
@@ -148,18 +148,18 @@ export default function Screen2(): JSX.Element {
                 });
               }}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M19.07 4.93A10 10 0 0 1 19.07 19.07M15.54 8.46A5 5 0 0 1 15.54 15.54" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
-            <span className="underline decoration-dotted text-[#ce82ff]">
+            <span className="underline decoration-dotted text-[#ce82ff] text-xl font-semibold">
               uno
             </span>
           </div>
 
           {/* Options Grid */}
-          <div className="grid grid-cols-2 gap-4 mb-8">
+          <div className="grid grid-cols-2 gap-6 mb-12 max-w-md mx-auto">
             {options.map(({ key, label, Icon }) => {
               const active = selected === key;
               const correct = checked && key === correctKey;
@@ -192,22 +192,24 @@ export default function Screen2(): JSX.Element {
           </div>
 
           {/* Feedback */}
-          {isCorrect && (
-            <div className="mb-4 p-3 bg-green-100 border border-green-300 rounded-lg">
-              <span className="text-green-700 font-semibold">¡Correcto! Great job!</span>
-            </div>
-          )}
-          {isWrong && (
-            <div className="mb-4 p-3 bg-red-100 border border-red-300 rounded-lg">
-              <span className="text-red-700 font-semibold">Not quite right. Try again!</span>
-            </div>
-          )}
+          <div className="px-6">
+            {isCorrect && (
+              <div className="mb-6 p-4 bg-green-100 border border-green-300 rounded-xl">
+                <span className="text-green-700 font-semibold text-lg">¡Correcto! Great job!</span>
+              </div>
+            )}
+            {isWrong && (
+              <div className="mb-6 p-4 bg-red-100 border border-red-300 rounded-xl">
+                <span className="text-red-700 font-semibold text-lg">Not quite right. Try again!</span>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Footer Bar */}
-        <div className="absolute left-4 right-4 bottom-[48px]">
+        <div className="absolute left-6 right-6 bottom-[60px]">
           <button
-            className="w-full h-12 rounded-xl text-white font-semibold tracking-wide disabled:opacity-60 transition-all active:translate-y-[2px]"
+            className="w-full h-14 rounded-2xl text-white font-bold text-lg tracking-wide disabled:opacity-60 transition-all active:translate-y-[2px]"
             disabled={!selected}
             onClick={handleCheck}
             style={{
@@ -220,8 +222,8 @@ export default function Screen2(): JSX.Element {
         </div>
 
         {/* Home Indicator */}
-        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
-          <div className="w-[134px] h-[5px] bg-black rounded-full"></div>
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+          <div className="w-[140px] h-[6px] bg-black rounded-full"></div>
         </div>
       </div>
     </div>
